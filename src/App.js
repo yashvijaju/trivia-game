@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import Auth from './frontend/Auth'
+import Home from './frontend/Home'
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
             <Auth />
           </Route>
           <Route path="/">
-            <p>Trivia Game</p>
+            <Home />
           </Route>
         </Switch>
       </div>
