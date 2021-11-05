@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import Auth from './frontend/Auth'
+import Leaderboard from './frontend/Leaderboard'
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
             <li>
               <Link to="/login">Login</Link>
             </li>
+            <li>
+              <Link to ="/leaderboard">Leaderboard</Link>
+            </li>
           </ul>
         </nav>
         {/* 
@@ -31,6 +35,9 @@ function App() {
         <Switch>
           <Route path="/login">
             <Auth />
+          </Route>
+          <Route path="/leaderboard">
+            <Leaderboard />
           </Route>
           <Route path="/">
             <p>Trivia Game</p>
