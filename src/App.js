@@ -2,41 +2,56 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Routes,
   Link,
   Route,
 } from "react-router-dom";
 
-import Auth from './frontend/Auth'
+import { AppBar, Toolbar, Typography, Button } from '@mui/material'
+
+import logo from './resources/logo.png'
+
+import Login from './frontend/Login'
 
 function App() {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-          </ul>
-        </nav>
-        {/* 
-        
-          React Router Dom Guide: https://v5.reactrouter.com/web/guides/quick-start
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div">
+            <img src={logo} style={{width: '40px', height: 'auto'}}/>
+            Trivia-Game
+          </Typography>
+          <Link to="/">
+            <Button color="inherit">
+              <Typography variant="subtitle1">Home</Typography>
+            </Button>
+          </Link>
+          <Link to="/leaderboard">
+            <Button color="inherit">
+              <Typography variant="subtitle1">Leaderboard</Typography>
+            </Button>
+          </Link>
+          <Link to="/login">
+            <Button color="inherit">
+              <Typography variant="subtitle1">Log In</Typography>
+            </Button>
+          </Link>
+          <Link to="/signup">
+            <Button color="inherit">
+              <Typography variant="subtitle1">Sign Up</Typography>
+            </Button>
+          </Link>
+        </Toolbar>
+      </AppBar>
 
-        */}
-        <Switch>
-          <Route path="/login">
-            <Auth />
-          </Route>
-          <Route path="/">
-            <p>Trivia Game</p>
-          </Route>
-        </Switch>
-      </div>
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/">
+          <p>home</p>
+        </Route>
+      </Switch>
     </Router>
   );
 }
