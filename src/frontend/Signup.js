@@ -17,9 +17,15 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState("");
+
   const [passwordMatch, setPasswordMatch] = useState(false);
+  const [duplicateUserName, setDuplicateUsername] = useState(false);
+  
 
   function CreateAccount() {
+      /*if (user exists) {
+        setDuplicateUsername(true);
+      }*/
   }
 
   return (
@@ -35,7 +41,7 @@ export default function Login() {
         </Typography>
         <Divider/>
         <br/><br/>
-        <TextField fullWidth placeholder="username" onChange={(e)=>setUsername(e.target.value)} value={username} variant="standard" InputProps={{
+        <TextField fullWidth placeholder="username" onChange={(e)=>{setUsername(e.target.value); setDuplicateUsername(false)}} value={username} variant="standard" InputProps={{
           startAdornment: (
             <InputAdornment position="start">
               <AccountCircle />
@@ -64,6 +70,7 @@ export default function Login() {
         }}/>
         <br/>
         {confirmPassword && !passwordMatch && <Typography color="error" align="left">Error: passwords do not match.</Typography>}
+        {duplicateUserName && <Typography color="error" align="left">Error: the username {username} is already taken.</Typography>}
         <br/>
         {username && password && password==confirmPassword && 
           <Button color="inherit" variant="contained" fullWidth sx={{backgroundColor: bgGreen}}>
