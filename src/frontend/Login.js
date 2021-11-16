@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { Grid, Typography, Divider, TextField, InputAdornment, IconButton, Button } from '@mui/material';
-// import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 import logo from '../resources/logo.png'
 import './Login.css'
