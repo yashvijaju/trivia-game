@@ -8,6 +8,7 @@ import {
 
 
 import Login from './frontend/Login'
+import Signup from './frontend/Signup'
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
       <Switch>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/signup">
+          <Signup />
         </Route>
         <Route path="/">
           <p>home</p>

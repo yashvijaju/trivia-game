@@ -15,9 +15,11 @@ const bgGreen='#84c454';
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState("");
+  const [passwordMatch, setPasswordMatch] = useState(false);
 
-  function LogIn() {
+  function CreateAccount() {
   }
 
   return (
@@ -25,11 +27,11 @@ export default function Login() {
       <Grid item xs={4} container direction="column" alignItems="center" sx={{backgroundColor: 'white', padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
         <img src={logo} className="logo"/>
         <Typography variant="h5" align="center">
-          <b>Welcome Back to TRI-via!</b>
+          <b>Welcome to TRI-via!</b>
         </Typography>
         <Typography variant="subtitle2" align="center">
-          Please enter your username and password below <br/>
-          Or <Link to="signup">create an account</Link> if not registered yet
+          Please create your account below <br/>
+          Or <Link to="signup">log in</Link> if you already have an account
         </Typography>
         <Divider/>
         <br/><br/>
@@ -49,9 +51,23 @@ export default function Login() {
           ),
         }}/>
         <br/>
-        {username && password && 
+        <TextField fullWidth placeholder="confirm password" type={showPassword ? 'text' : 'password'} onChange={(e)=>{
+            setConfirmPassword(e.target.value); 
+            if (password !== e.target.value) setPasswordMatch(false);
+            else setPasswordMatch(true);
+        }} variant="standard" value={confirmPassword} InputProps={{
+          startAdornment: (
+            <InputAdornment position="start" onClick={()=>setShowPassword(!showPassword)} sx={{cursor: 'pointer'}}>
+              {showPassword ? <Visibility /> : <VisibilityOff />}
+            </InputAdornment>
+          ),
+        }}/>
+        <br/>
+        {confirmPassword && !passwordMatch && <Typography color="error" align="left">Error: passwords do not match.</Typography>}
+        <br/>
+        {username && password && password==confirmPassword && 
           <Button color="inherit" variant="contained" fullWidth sx={{backgroundColor: bgGreen}}>
-            <Typography variant="subtitle1" onClick={LogIn}>Sign In</Typography>
+            <Typography variant="subtitle1" onClick={CreateAccount}>Create Account</Typography>
           </Button>
         }
         <Divider/>
