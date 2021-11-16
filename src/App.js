@@ -9,21 +9,47 @@ import {
 
 import Login from './frontend/Login'
 import Signup from './frontend/Signup'
+import GameAddition from './frontend/GameAddition';
 
 function App() {
   return (
     <Router>
       <Switch>
+        {/* auth */}
         <Route path="/login">
-          <Login />
+          <Login/>
         </Route>
         <Route path="/signup">
-          <Signup />
+          <Signup/>
         </Route>
+        {/* games */}
+        <Route path="/gameAddition">
+          <GameAddition/>
+        </Route>
+
         <Route path="/">
           <p>home</p>
         </Route>
       </Switch>
+
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/login">Log In</Link>
+            </li>
+            <li>
+              <Link to="/signup">Sign Up</Link>
+            </li>
+            <li>
+              <Link to="/gameAddition">Addition Game</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </Router>
   );
 }
