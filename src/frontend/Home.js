@@ -1,6 +1,10 @@
+import Navbar from "./Components/Navbar/Navbar";
+
+import react from "react";
+
 function Home() {
     return (
-      <div>Home</div>
+      <Navbar />
     );
   }
   
