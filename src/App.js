@@ -14,16 +14,7 @@ function App() {
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-          </ul>
-        </nav>
+        
         {/* 
         
           React Router Dom Guide: https://v5.reactrouter.com/web/guides/quick-start
