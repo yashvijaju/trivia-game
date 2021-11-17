@@ -38,28 +38,6 @@ function App() {
           <Home/>
         </Route>
       </Switch>
-
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">Log In</Link>
-            </li>
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
-            <li>
-              <Link to="/gameAddition">Addition Game</Link>
-            </li>
-            <li>
-              <Link to="/leaderboard">Leaderboard</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
     </Router>
   );
 }
