@@ -1,7 +1,26 @@
 
 import React, { useState } from "react";
+import {Button, TextField, Typography} from '@mui/material';
 
-export default function GameAddition() {
+function GameAddition() {
+  return (
+    <div className="GameAddition">
+      <div>{"Timer: "}</div>
+      <div>{"Score: "}</div>
+      <div>{"Question: "}</div>
+      <div>
+        <TextField id="submisionField" label="Submission Box" variant="standard" />
+        </div>
+      <div>
+        <Button id="checkButton" variant="contained">Check Answer</Button>
+        </div>
+      <div>
+        <Button id="startButton" variant="contained">Start Game</Button>
+        </div>
+    </div>
+  );
+}
+  /*
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
   const [sum, setSum] = useState(0);
@@ -28,7 +47,7 @@ export default function GameAddition() {
     }
     generateQuestion();
   };
-
+  
   return (
     <div className="GameAddition">
       <div style={{
@@ -68,8 +87,8 @@ export default function GameAddition() {
       </div>  
     </div>
   );
-}
+  */
 
 
 
-  //export default GameAddition;
+  export default GameAddition;
