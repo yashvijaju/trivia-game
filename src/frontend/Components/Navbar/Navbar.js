@@ -13,13 +13,16 @@ const Navbar= () =>{
       <Link to="/">Home</Link>
     </li>
     <li>
-      <Link to="/Auth">Login</Link>
+      <Link to="/login">Log In</Link>
     </li>
     <li>
-      <Link to="/Game">Games</Link>
+      <Link to="/signup">Sign Up</Link>
     </li>
     <li>
-      <Link to="/Lb">LeaderBoard</Link>
+      <Link to="/gameAddition">Games</Link>
+    </li>
+    <li>
+      <Link to="/leaderboard">LeaderBoard</Link>
     </li>
 		</ul>
 
