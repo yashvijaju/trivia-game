@@ -12,6 +12,7 @@ import Login from './frontend/Login'
 import Signup from './frontend/Signup'
 import GameAddition from './frontend/GameAddition';
 import Leaderboard from './frontend/Leaderboard'
+import Home from './frontend/Home'
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
         </Route>
 
         <Route path="/">
-          <p>home</p>
+          <Home/>
         </Route>
       </Switch>
 
