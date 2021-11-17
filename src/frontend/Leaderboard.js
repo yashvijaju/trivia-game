@@ -1,5 +1,6 @@
-import react from "react";
+import React from "react";
 import "./styling.css"
+
 function Leaderboard() {
     return (
     
@@ -20,7 +21,7 @@ function Leaderboard() {
 
 
 
-<div class = "parent">
+	<div class = "parent">
 	<div class = "mid">  <a> Leaderboard </a> 	</div>
 	
 	<div class = "addition">  <a> Addition </a> 	</div>
@@ -34,4 +35,4 @@ function Leaderboard() {
     );
   }
   
-  export default Leaderboard;
+export default Leaderboard;
