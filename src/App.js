@@ -10,6 +10,7 @@ import {
 import Login from './frontend/Login'
 import Signup from './frontend/Signup'
 import GameAddition from './frontend/GameAddition';
+import Leaderboard from './frontend/Leaderboard'
 
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
         {/* games */}
         <Route path="/gameAddition">
           <GameAddition/>
+        </Route>
+        {/* leaderboard */}
+        <Route path="/leaderboard">
+          <Leaderboard/>
         </Route>
 
         <Route path="/">
@@ -46,6 +51,9 @@ function App() {
             </li>
             <li>
               <Link to="/gameAddition">Addition Game</Link>
+            </li>
+            <li>
+              <Link to="/leaderboard">Leaderboard</Link>
             </li>
           </ul>
         </nav>
