@@ -2,8 +2,10 @@
 import React, { useEffect, useState } from "react";
 import {Button, TextField, Typography, Grid} from '@mui/material';
 import { blue } from "@mui/material/colors";
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import CheckIcon from '@mui/icons-material/Check';
 
-const bg ='#00FFFF';
+const bg ='#e1bee7';
 const question_number = 1;
 const first_number = 8821;
 const sign = "+";
@@ -29,32 +31,46 @@ function GameAddition() {
     <Grid container direction="row" justifyContent="center" alignItems="center" sx={{height: '100vh', backgroundColor: bg}}>
       <Grid item xs={8} container direction="column" sx={{ backgroundColor: 'white', padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
         <Typography align="left">
+          <br/>
             <b>Question {question_number}</b>
         </Typography>
+        <Typography align="right" variant="h5">
+            <b>Timer<AccessTimeIcon sx={{ fontSize: 20 }}/>: {sec}</b>
+
+        </Typography>
+        <Typography align="right" variant="h5">
+            <b>Score<CheckIcon sx={{ fontSize: 20 }}/>: </b>
+        </Typography>
         <Typography align="center" variant="h3">
+        <br/>
             <b>{first_number} {sign} {second_number} = ?</b>
         </Typography>
         <Typography align="center" variant="h3">
-            <b>.</b>
         </Typography>
         <Typography align="center" variant="h3">
-            <b>.</b>
+        <br/>
         </Typography>
         <Typography align="center" variant="h3">
-            <b>.</b>
+        <br/>
         </Typography>
         <Grid item xs={6} container direction="row">
-          <TextField placeholder="Answer" onChange={(e)=>setAnswer(e.target.value)}></TextField>
+        <TextField 
+              style = {{
+              width: 300
+              }} 
+              inputProps={{min: 0, style: { textAlign: 'center' }}} /*centers the "Answer" in textfield*/
+              placeholder="Answer" 
+              onChange={(e)=>setAnswer(e.target.value)}></TextField>
           
-          <Button id="checkButton" variant="contained">Check</Button>
+          
+          <Button style={{
+            borderRadius: 7,
+            backgroundColor: "#26c6da",
+            padding: "9px 18px",
+            fontSize: "18px"
+            }} 
+            variant="contained">Check</Button>
         </Grid>
-        <Typography align="left" variant="h5">
-            <b>Timer: {sec}</b>
-
-        </Typography>
-        <Typography align="left" variant="h5">
-            <b>Score: </b>
-        </Typography>
       </Grid>
     </Grid>
 
