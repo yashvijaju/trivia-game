@@ -1,21 +1,64 @@
 
 import React, { useEffect, useState } from "react";
-import {Button, TextField, Typography} from '@mui/material';
-import { render } from "@testing-library/react";
+import {Button, TextField, Typography, Grid} from '@mui/material';
+import { blue } from "@mui/material/colors";
+
+const bg ='#00FFFF';
+const question_number = 1;
+const first_number = 8821;
+const sign = "+";
+const second_number = 1078;
+const filler = ' ';
 
 function GameAddition() {
-  const [seconds, setSeconds] = React.useState(30);
+  const [answer, setAnswer] = useState("");
+  const [sec, setSec] = React.useState(30);
+  
   useEffect(() => {
-    if(seconds < 0)
+    if(sec < 0)
     {
-      setSeconds(0);
+      setSec(0);
     }
-    else if (seconds > 0)
+    else if(sec > 0)
     {
-      setTimeout(() => setSeconds(seconds - 1), 1000);
+      setTimeout(() => setSec(sec - 1), 1000);
     }
   })
+
   return (
+    <Grid container direction="row" justifyContent="center" alignItems="center" sx={{height: '100vh', backgroundColor: bg}}>
+      <Grid item xs={8} container direction="column" sx={{ backgroundColor: 'white', padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
+        <Typography align="left">
+            <b>Question {question_number}</b>
+        </Typography>
+        <Typography align="center" variant="h3">
+            <b>{first_number} {sign} {second_number} = ?</b>
+        </Typography>
+        <Typography align="center" variant="h3">
+            <b>.</b>
+        </Typography>
+        <Typography align="center" variant="h3">
+            <b>.</b>
+        </Typography>
+        <Typography align="center" variant="h3">
+            <b>.</b>
+        </Typography>
+        <Grid item xs={6} container direction="row">
+          <TextField placeholder="Answer" onChange={(e)=>setAnswer(e.target.value)}></TextField>
+          
+          <Button id="checkButton" variant="contained">Check</Button>
+        </Grid>
+        <Typography align="left" variant="h5">
+            <b>Timer: {sec}</b>
+
+        </Typography>
+        <Typography align="left" variant="h5">
+            <b>Score: </b>
+        </Typography>
+      </Grid>
+    </Grid>
+
+    /*
     <div className="GameAddition">
       <div>Timer: {seconds}</div>
       <div>{"Score: "}</div>
@@ -29,7 +72,7 @@ function GameAddition() {
       <div>
         <Button id="startButton" variant="contained">Start Game</Button>
         </div>
-    </div>
+    </div>*/
   );
 }
 
