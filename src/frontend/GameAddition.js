@@ -1,9 +1,51 @@
 
 import React, { useState } from "react";
-import {Button, TextField, Typography} from '@mui/material';
+import {Button, TextField, Typography, Grid} from '@mui/material';
+import { blue } from "@mui/material/colors";
+
+const bg ='#00FFFF';
+const question_number = 1;
+const first_number = 8821;
+const sign = "+";
+const second_number = 1078;
+const filler = ' ';
 
 function GameAddition() {
+  const [answer, setAnswer] = useState("");
+  
   return (
+    <Grid container direction="row" justifyContent="center" alignItems="center" sx={{height: '100vh', backgroundColor: bg}}>
+      <Grid item xs={8} container direction="column" sx={{ backgroundColor: 'white', padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
+        <Typography align="left">
+            <b>Question {question_number}</b>
+        </Typography>
+        <Typography align="center" variant="h3">
+            <b>{first_number} {sign} {second_number} = ?</b>
+        </Typography>
+        <Typography align="center" variant="h3">
+            <b>.</b>
+        </Typography>
+        <Typography align="center" variant="h3">
+            <b>.</b>
+        </Typography>
+        <Typography align="center" variant="h3">
+            <b>.</b>
+        </Typography>
+        <Grid item xs={6} container direction="row">
+          <TextField placeholder="Answer" onChange={(e)=>setAnswer(e.target.value)}></TextField>
+          
+          <Button id="checkButton" variant="contained">Check</Button>
+        </Grid>
+        <Typography align="left" variant="h5">
+            <b>Timer: </b>
+        </Typography>
+        <Typography align="left" variant="h5">
+            <b>Score: </b>
+        </Typography>
+      </Grid>
+    </Grid>
+
+    /*
     <div className="GameAddition">
       <div>{"Timer: "}</div>
       <div>{"Score: "}</div>
@@ -17,7 +59,7 @@ function GameAddition() {
       <div>
         <Button id="startButton" variant="contained">Start Game</Button>
         </div>
-    </div>
+    </div>*/
   );
 }
   /*
