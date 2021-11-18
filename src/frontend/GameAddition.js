@@ -1,11 +1,23 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {Button, TextField, Typography} from '@mui/material';
+import { render } from "@testing-library/react";
 
 function GameAddition() {
+  const [seconds, setSeconds] = React.useState(30);
+  useEffect(() => {
+    if(seconds < 0)
+    {
+      setSeconds(0);
+    }
+    else if (seconds > 0)
+    {
+      setTimeout(() => setSeconds(seconds - 1), 1000);
+    }
+  })
   return (
     <div className="GameAddition">
-      <div>{"Timer: "}</div>
+      <div>Timer: {seconds}</div>
       <div>{"Score: "}</div>
       <div>{"Question: "}</div>
       <div>
@@ -20,6 +32,7 @@ function GameAddition() {
     </div>
   );
 }
+
   /*
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
