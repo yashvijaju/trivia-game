@@ -3,19 +3,22 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Link,
   Route,
 } from "react-router-dom";
+
+import Navbar from "./frontend/Components/Navbar/Navbar"
 
 
 import Login from './frontend/Login'
 import Signup from './frontend/Signup'
-import GameAddition from './frontend/GameAddition';
+import GameAddition from './frontend/GameAddition'
 import Leaderboard from './frontend/Leaderboard'
 import Home from './frontend/Home'
 
 function App() {
   return (
+  <>
+    <Navbar/>
     <Router>
       <Switch>
         {/* auth */}
@@ -39,6 +42,7 @@ function App() {
         </Route>
       </Switch>
     </Router>
+  </>
   );
 }
 
