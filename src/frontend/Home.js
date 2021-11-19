@@ -1,6 +1,6 @@
 import Navbar from "./Components/Navbar/Navbar";
 
-import react from "react";
+import React from "react";
 
 function Home() {
     return (
