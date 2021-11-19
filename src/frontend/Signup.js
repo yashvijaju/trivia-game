@@ -37,7 +37,7 @@ export default function Login() {
         </Typography>
         <Typography variant="subtitle2" align="center">
           Please create your account below <br/>
-          Or <Link to="signup">log in</Link> if you already have an account
+          Or <Link to="login">log in</Link> if you already have an account
         </Typography>
         <Divider/>
         <br/><br/>
