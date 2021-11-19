@@ -7,35 +7,6 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import {  Link } from "react-router-dom";
-<<<<<<< HEAD
-const Navbar= () =>{
-  return (
-		<header class="header">
-		<div class="left">
-			<a>Tri-Via Games</a>
-		</div>
-  <div class="mid">
-		<ul class="navbar">
-			 <li>
-      <Link to="/">Home</Link>
-    </li>
-    <li>
-      <Link to="/login">Log In</Link>
-    </li>
-    <li>
-      <Link to="/signup">Sign Up</Link>
-    </li>
-    <li>
-      <Link to="/gameAddition">Games</Link>
-    </li>
-    <li>
-      <Link to="/leaderboard">LeaderBoard</Link>
-    </li>
-		</ul>
-=======
->>>>>>> 655c1df6f876b42ab051e884921f31d82cc6e42f
-
-
 
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
