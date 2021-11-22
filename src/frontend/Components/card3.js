@@ -7,24 +7,23 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 
-export default function MediaCard() {
+export default function MediaCard3() {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
         height="280"
-        image="https://www.theschoolrun.com/sites/theschoolrun.com/files/article_images/addition.jpg"
-        alt="Additon"
+        image="https://www.theschoolrun.com/sites/theschoolrun.com/files/article_images/division.png"
+        alt="Division"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Addition
+          Division
         </Typography>
         <Typography variant="body2" color="text.secondary">
-        Addition is one of the four basic operations of arithmetic, 
-        the other three being subtraction, multiplication and division. 
-        The addition of two whole numbers results in the total amount or 
-        sum of those values combined.
+        Division is a simple operation in which a number is divided. 
+        It's easiest to think of it as a number of objects being 
+        divided among a certain number of people.
         </Typography>
       </CardContent>
       <CardActions>
