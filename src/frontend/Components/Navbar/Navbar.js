@@ -18,9 +18,10 @@ export default function Navbar() {
       <AppBar position="static" >
         <Toolbar>
           <Button color="inherit" href="/">Home</Button>
-          <Button color = "inherit" href="/Game">Game</Button>
-          <Button color="inherit" href="/Lb">Leaderboard</Button>
-          <Button color="inherit" href="/Auth">Login</Button>
+          
+          <Button color="inherit" href="/leaderboard">Leaderboard</Button>
+          <Button color="inherit" href="/login">Log In</Button>
+          <Button color="inherit" href="/signup">Sign Up</Button>
         </Toolbar>
       </AppBar>
     </Box>

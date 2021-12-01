@@ -28,7 +28,7 @@ function GameAddition() {
   })
 
   return (
-    <Grid container direction="row" justifyContent="center" alignItems="center" sx={{height: '100vh', backgroundColor: bg}}>
+    <Grid container direction="row" justifyContent="center" alignItems="center" sx={{height: '100vh', position: 'fixed', backgroundColor: bg}}>
       <Grid item xs={8} container direction="column" sx={{ backgroundColor: 'white', padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
         <Typography align="left">
           <br/>

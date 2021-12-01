@@ -7,28 +7,27 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 
-export default function MediaCard() {
+export default function MediaCard1() {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
         height="280"
-        image="https://www.theschoolrun.com/sites/theschoolrun.com/files/article_images/addition.jpg"
-        alt="Additon"
+        image="https://www.theschoolrun.com/sites/theschoolrun.com/files/article_images/subtraction.png"
+        alt="Subtraction"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Addition
+          Subtraction
         </Typography>
         <Typography variant="body2" color="text.secondary">
-        Addition is one of the four basic operations of arithmetic, 
-        the other three being subtraction, multiplication and division. 
-        The addition of two whole numbers results in the total amount or 
-        sum of those values combined.
+        Subtraction is an arithmetic operation that represents the 
+        operation of removing objects from a collection. Subtraction
+         is signified by the minus sign, −.
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" href="/gameAddition">Play Multiplayer</Button>
+        <Button size="small">Play Multiplayer</Button>
         <Button size="small">Solo Practice</Button>
       </CardActions>
     </Card>

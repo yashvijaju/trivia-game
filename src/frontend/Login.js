@@ -21,7 +21,7 @@ export default function Login() {
   }
 
   return (
-    <Grid container direction="row" justifyContent="center" alignItems="center" sx={{height: '100vh', backgroundColor: bgGreen}}>
+    <Grid container direction="row" justifyContent="center" alignItems="center" sx={{height: '100vh', position: 'fixed', backgroundColor: bgGreen}}>
       <Grid item xs={4} container direction="column" alignItems="center" sx={{backgroundColor: 'white', padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
         <img src={logo} className="logo"/>
         <Typography variant="h5" align="center">

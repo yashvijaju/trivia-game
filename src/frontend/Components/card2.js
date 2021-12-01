@@ -7,28 +7,26 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 
-export default function MediaCard() {
+export default function MediaCard2() {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
         height="280"
-        image="https://www.theschoolrun.com/sites/theschoolrun.com/files/article_images/addition.jpg"
-        alt="Additon"
+        image="https://www.theschoolrun.com/sites/theschoolrun.com/files/article_images/multiplication.png"
+        alt="Multiplication"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Addition
+          Multiplication
         </Typography>
         <Typography variant="body2" color="text.secondary">
-        Addition is one of the four basic operations of arithmetic, 
-        the other three being subtraction, multiplication and division. 
-        The addition of two whole numbers results in the total amount or 
-        sum of those values combined.
+        Essentially, to multiply numbers is to add groups of a 
+        number. Multiplying means repeated addition of a number.
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" href="/gameAddition">Play Multiplayer</Button>
+        <Button size="small">Play Multiplayer</Button>
         <Button size="small">Solo Practice</Button>
       </CardActions>
     </Card>
