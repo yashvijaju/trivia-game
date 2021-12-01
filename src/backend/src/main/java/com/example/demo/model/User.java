@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
-@Document("users")
+@Document(collection = "users")
 public class User {
 
     @Id
@@ -27,8 +27,17 @@ public class User {
         this.high_scores.put("Division", 0);
     }
 
-    public String getUsername() {
-        return username;
+    public User getUser(String username) {
+        if (this.username == username) return this;
+        return null;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public TreeMap<String,Integer> getHighScore() {
+        return high_scores;
     }
 
     public Boolean LogIn(String username, String password) {
