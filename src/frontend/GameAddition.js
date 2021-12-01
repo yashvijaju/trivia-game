@@ -79,7 +79,7 @@ function GameAddition() {
           <Grid item xs={6}>
             <Button style={{
               //margin: '0px 5px 0px 0px',
-              width: '28em',
+              width: '100%',
               borderRadius: 7,
               backgroundColor: "#26c6da", 
               padding: "9px 18px",
@@ -92,7 +92,7 @@ function GameAddition() {
           <Grid item xs={6}>
             <Button style={{
               //margin: '0px 5px 0px 0px',
-              width: '28em',
+              width: '100%',
               borderRadius: 7,
               backgroundColor: "#f48fb1", /*styling "check" button*/
               padding: "9px 18px",
@@ -105,7 +105,7 @@ function GameAddition() {
           <Grid item xs={6}>
             <Button style={{
               //margin: '5px 0px 0px 0px',
-              width: '28em',
+              width: '100%',
               borderRadius: 7,
               backgroundColor: "#ffb74d", /*styling "check" button*/
               padding: "9px 18px",
@@ -118,7 +118,7 @@ function GameAddition() {
           <Grid item xs={6}>
             <Button style={{
               //margin: '5px 0px 0px 5px',
-              width: '28em',
+              width: '100%',
               borderRadius: 7,
               backgroundColor: "#81c784", /*styling "check" button*/
               padding: "9px 18px",
