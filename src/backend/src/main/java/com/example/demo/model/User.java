@@ -39,8 +39,4 @@ public class User {
     public TreeMap<String,Integer> getHighScore() {
         return high_scores;
     }
-
-    public Boolean LogIn(String username, String password) {
-        return this.username.equals(username) && this.password.equals(password);
-    }
 }
