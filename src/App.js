@@ -1,4 +1,4 @@
-import React, { Component }  from 'react';
+import React, { useState, useEffect }  from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -16,17 +16,23 @@ import Leaderboard from './frontend/Leaderboard'
 import Home from './frontend/Home'
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+  }, [isLoggedIn])
+
   return (
   <>
-    <Navbar/>
+    <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} username={username}/>
     <Router>
       <Switch>
         {/* auth */}
         <Route path="/login">
-          <Login/>
+          {isLoggedIn ? <Home/> : <Login setIsLoggedInGLobal={setIsLoggedIn} setUsernameGlobal={setUsername}/>}
         </Route>
         <Route path="/signup">
-          <Signup/>
+          {isLoggedIn ? <Home/> : <Signup setIsLoggedInGLobal={setIsLoggedIn} setUsernameGlobal={setUsername}/>}
         </Route>
         {/* games */}
         <Route path="/gameAddition">

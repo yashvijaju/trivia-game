@@ -15,26 +15,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.User;
+import com.example.demo.model.UserPassword;
 import com.example.demo.repository.UserRepository;
 
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity < User > getUserById(@PathVariable(value = "id") String username)
-    throws ResourceNotFoundException {
-        User user = userRepository.findById(username)
-            .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + username));
-        return ResponseEntity.ok().body(user);
+    @GetMapping("/users/{username}")
+    public Boolean getUser(@PathVariable(value = "username") String username) {
+        if (userRepository.existsById(username)) return true;
+        return false;
+    }
+
+    @GetMapping("/users/{username}/{password}")
+    public Boolean logUserIn(@PathVariable(value = "username") String username, @PathVariable(value = "password") String password) {
+        User user_ = userRepository.findUser(username, password);
+        if (user_ != null) return true;
+        return false;
     }
 
     @PostMapping("/users")
-    public User createEmployee(@RequestBody String username, String password) {
-        User user_new = new User(username, password);
+    public User createEmployee(@RequestBody UserPassword user) {
+        User user_new = new User(user.getUsername(), user.getPassword());
         return userRepository.save(user_new);
     }
 }

@@ -1,23 +1,44 @@
 import React, { useState } from 'react';
+import User from './Api/User'
 
 import { Grid, Typography, Divider, TextField, InputAdornment, Button } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import logo from '../resources/logo.png'
 import './Login.css'
 
 const bgGreen='#84c454';
 
-export default function Login() {
+export default function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState("");
 
+  const [usernameInvalid, setUsernameInvalid] = useState(false);
+  const [passwordInvalid, setPasswordInvalid] = useState(false);  
+
+  const history = useHistory();
+
   function LogIn() {
+    User.getUserById(username).then(res => {
+      if (res.data) {
+        User.getUserByIdPassword(username, password).then(res_ => {
+          if (!res_.data) {
+            setPasswordInvalid(true);
+          } else {
+            props.setIsLoggedInGLobal(true);
+            props.setUsernameGlobal(username);
+            history.push("/");
+          }
+        })
+      } else {
+        setUsernameInvalid(true);
+      }
+    })
   }
 
   return (
@@ -33,7 +54,7 @@ export default function Login() {
         </Typography>
         <Divider/>
         <br/><br/>
-        <TextField fullWidth placeholder="username" onChange={(e)=>setUsername(e.target.value)} value={username} variant="standard" InputProps={{
+        <TextField fullWidth placeholder="username" onChange={(e)=>{setUsername(e.target.value); setUsernameInvalid(false)}} value={username} variant="standard" InputProps={{
           startAdornment: (
             <InputAdornment position="start">
               <AccountCircle />
@@ -41,7 +62,7 @@ export default function Login() {
           ),
         }}/>
         <br/>
-        <TextField fullWidth placeholder="password" type={showPassword ? 'text' : 'password'} onChange={(e)=>setPassword(e.target.value)} variant="standard" value={password} InputProps={{
+        <TextField fullWidth placeholder="password" type={showPassword ? 'text' : 'password'} onChange={(e)=>{setPassword(e.target.value); setPasswordInvalid(false)}} variant="standard" value={password} InputProps={{
           startAdornment: (
             <InputAdornment position="start" onClick={()=>setShowPassword(!showPassword)} sx={{cursor: 'pointer'}}>
               {showPassword ? <Visibility /> : <VisibilityOff />}
@@ -49,7 +70,10 @@ export default function Login() {
           ),
         }}/>
         <br/>
-        {username && password && 
+        {passwordInvalid && <Typography color="error" align="left">Error: Wrong password. Please try again.</Typography>}
+        {usernameInvalid && <Typography color="error" align="left">Error: the username {username} is invalid. Please try again or <Link to="signup">create an account</Link> now.</Typography>}
+        <br/>
+        {!passwordInvalid && !usernameInvalid && username && password && 
           <Button color="inherit" variant="contained" fullWidth sx={{backgroundColor: bgGreen}}>
             <Typography variant="subtitle1" onClick={LogIn}>Sign In</Typography>
           </Button>
