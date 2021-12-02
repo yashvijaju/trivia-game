@@ -24,9 +24,9 @@ export default function Login(props) {
   const history = useHistory();
 
   function LogIn() {
-    User.getUserById(username).then(res => {
+    User.getUser(username).then(res => {
       if (res.data) {
-        User.getUserByIdPassword(username, password).then(res_ => {
+        User.logUserIn(username, password).then(res_ => {
           if (!res_.data) {
             setPasswordInvalid(true);
           } else {

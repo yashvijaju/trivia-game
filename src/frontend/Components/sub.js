@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import List from "@material-ui/core/List";
+import List from '@mui/material/List';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';

@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User createEmployee(@RequestBody UserPassword user) {
+    public User createUser(@RequestBody UserPassword user) {
         User user_new = new User(user.getUsername(), user.getPassword());
         return userRepository.save(user_new);
     }

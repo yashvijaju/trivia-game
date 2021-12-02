@@ -26,7 +26,7 @@ export default function Signup(props) {
   
 
   function CreateAccount() {
-      User.getUserById(username).then(res => {
+      User.getUser(username).then(res => {
         if (res.data) {
           setDuplicateUsername(true);
           setUsername("");
