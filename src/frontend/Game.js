@@ -39,15 +39,18 @@ function Game() {
   const [sec, setSec] = React.useState(30);
   const [score, setScore] = React.useState(0);
   const [play] = useSound(undertale);
+  const [timerId, setTimerId] = useState();
   
   useEffect(() => {
     if (sec === 0) {
       CheckAnswer(eval(firstNumber+math_sign+secondNumber)+1);
+    } else if (sec === 30) {
+      clearTimeout(timerId);
+      setTimerId(setTimeout(() => setSec(sec - 1), 1000))
+    } else if (sec > 0) {
+      setTimerId(setTimeout(() => setSec(sec - 1), 1000))
     }
-    else if (sec > 0) {
-      setTimeout(() => setSec(sec - 1), 1000);
-    }
-  })
+  }, [sec])
 
   useEffect(()=>play(),[play])
   useEffect(()=>GetNextQuestion(),[])
