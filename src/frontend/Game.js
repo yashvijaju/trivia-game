@@ -34,6 +34,7 @@ function Game() {
     "#ffb74d",
     "#81c784"
   ];
+  const [ansCorrect, setAnsCorrect] = useState("white");
 
   const [sec, setSec] = React.useState(30);
   const [score, setScore] = React.useState(0);
@@ -41,7 +42,7 @@ function Game() {
   
   useEffect(() => {
     if (sec === 0) {
-      GetNextQuestion()
+      CheckAnswer(eval(firstNumber+math_sign+secondNumber)+1);
     }
     else if (sec > 0) {
       setTimeout(() => setSec(sec - 1), 1000);
@@ -52,6 +53,7 @@ function Game() {
   useEffect(()=>GetNextQuestion(),[])
 
   function GetNextQuestion() {
+    setAnsCorrect("white");
     setSec(30);
     GameService.getNum().then(res => {
       setFirstNumber(res.data);
@@ -79,16 +81,18 @@ function Game() {
   }
 
   function CheckAnswer(ans) {
-    if (ans === eval(firstNumber+math_sign+secondNumber))
-    {
-      GetNextQuestion()
-      setSecondNumber((score) => score + 1);
+    if (ans === eval(firstNumber+math_sign+secondNumber)) {
+      setAnsCorrect("green");
+      setScore((score) => score + 1);
+    } else {
+      setAnsCorrect("red");
     }
+    setTimeout(() => GetNextQuestion(), 500);
   }
 
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center" sx={{height: '100vh', position: 'fixed', backgroundColor: bg}}>
-      <Grid item xs={8} container direction="column" sx={{ backgroundColor: 'white', padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
+      <Grid item xs={8} container direction="column" sx={{ backgroundColor: ansCorrect, padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
         <Typography align="left">
           <br/>
             <b>Question {question_number}</b>
