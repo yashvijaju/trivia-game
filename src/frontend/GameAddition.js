@@ -6,6 +6,8 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CheckIcon from '@mui/icons-material/Check';
 import useSound from 'use-sound';
 import undertale from '../resources/undertale.m4a';
+import { StarTwoTone } from "@mui/icons-material";
+import Game from './Api/Game'
 
 const bg ='#e1bee7';
 const question_number = 1;
@@ -13,9 +15,21 @@ const sign = "+";
 const filler = ' ';
 
 function GameAddition() {
-  const [firstNumber, setFirstNumber] = useState(8821);
-  const [secondNumber, setSecondNumber] = useState(1078);
+  const [firstNumber, setFirstNumber] = useState(Game.getNum);
+  const [secondNumber, setSecondNumber] = useState(Game.getNum);
 
+  const [answer1, setAnswer1] = useState(1);
+  const [answer2, setAnswer2] = useState(2);
+  const [answer3, setAnswer3] = useState(3);
+  const [answer4, setAnswer4] = useState(4);
+
+  const [falseAnswer1, setFalseAnswer1] = useState(0);
+  const [falseAnswer2, setFalseAnswer2] = useState(0);
+  const [falseAnswer3, setFalseAnswer3] = useState(0);
+  const [falseAnswer4, setFalseAnswer4] = useState(0);
+
+  const [correctAnswer, setCorrectAnswer] = useState(0);
+  const [correctAnswerChoice, setCorrectAnswerChoice] = useState(0);
   const [answer, setAnswer] = useState("");
   const [sec, setSec] = React.useState(30);
   const [play] = useSound(undertale);
@@ -37,10 +51,91 @@ function GameAddition() {
   function GetNextScreen()
   {
     setSec(30);
-    setFirstNumber(1234);
-    setSecondNumber(5678);
+    setCorrectAnswerChoice(Math.ceil(Math.random() * 4));
+    setFirstNumber(Game.getNum);
+    setSecondNumber(Game.getNum);
+    setCorrectAnswer(firstNumber + secondNumber);
+    do
+    {
+      setFalseAnswer1(Math.ceil(Math.random() * 21) + correctAnswer-10)
+    } while(falseAnswer1 === correctAnswer)
+
+    do
+    {
+      setFalseAnswer2(Math.ceil(Math.random() * 21) + correctAnswer-10)
+    } while(falseAnswer2 === correctAnswer || falseAnswer2 === falseAnswer1)
+
+    do
+    {
+      setFalseAnswer3(Math.ceil(Math.random() * 21) + correctAnswer-10)
+    } while(falseAnswer3 === correctAnswer || falseAnswer3 === falseAnswer2 || falseAnswer3 === falseAnswer1)
+
+    do
+    {
+      setFalseAnswer4(Math.ceil(Math.random() * 21) + correctAnswer-10)
+    } while(falseAnswer4 === correctAnswer || falseAnswer4 === falseAnswer3 || falseAnswer4 === falseAnswer2 || falseAnswer4 === falseAnswer1)
+
+    if(correctAnswerChoice === 1)
+    {
+      setAnswer1(correctAnswer);
+    }
+    else
+    {
+      setAnswer1(falseAnswer1);
+    }
+
+    if(correctAnswerChoice === 2)
+    {
+      setAnswer2(correctAnswer);
+    }
+    else
+    {
+      setAnswer2(falseAnswer2);
+    }
+
+    if(correctAnswerChoice === 3)
+    {
+      setAnswer3(correctAnswer);
+    }
+    else
+    {
+      setAnswer3(falseAnswer3);
+    }
+
+    if(correctAnswerChoice === 4)
+    {
+      setAnswer4(correctAnswer);
+    }
+    else
+    {
+      setAnswer4(falseAnswer4);
+    }
   }
 
+  function CheckAnswer()
+  {
+    if(answer === correctAnswer)
+    {
+      setSecondNumber((score) => score + 1);
+    }
+    //GetNextScreen();
+  }
+
+  function Test()
+  {
+    setAnswer1(Game.getNum);
+    setAnswer2(Game.getNum);
+
+  }
+
+
+  /*function beginGame()
+  {
+    GetNextScreen();
+    //setSec(120);
+
+  }
+  beginGame();*/
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center" sx={{height: '100vh', position: 'fixed', backgroundColor: bg}}>
       <Grid item xs={8} container direction="column" sx={{ backgroundColor: 'white', padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
@@ -85,8 +180,14 @@ function GameAddition() {
               padding: "9px 18px",
               fontSize: "18px",
               color: 'black'
-              }} 
-              variant="contained"><b>Option 1</b></Button>
+              }}
+              
+              onClick = {()=> {
+                setAnswer(answer1);
+                CheckAnswer();
+                //Test();
+              }}
+              variant="contained"><b>{answer1}</b></Button>
           </Grid>
 
           <Grid item xs={6}>
@@ -99,7 +200,11 @@ function GameAddition() {
               fontSize: "18px",
               color: 'black'
               }} 
-              variant="contained"><b>Option 2</b></Button>
+              onClick = {()=> {
+                setAnswer(answer2);
+                CheckAnswer();
+              }}
+              variant="contained"><b>{answer2}</b></Button>
           </Grid>
           
           <Grid item xs={6}>
@@ -111,8 +216,12 @@ function GameAddition() {
               padding: "9px 18px",
               fontSize: "18px",
               color: 'black'
-              }} 
-              variant="contained"><b>Option 3</b></Button>
+              }}
+              onClick = {()=> {
+                setAnswer(answer3);
+                CheckAnswer();
+              }}
+              variant="contained"><b>{answer3}</b></Button>
           </Grid>
 
           <Grid item xs={6}>
@@ -125,7 +234,11 @@ function GameAddition() {
               fontSize: "18px",
               color: 'black'
               }} 
-              variant="contained"><b>Option 4</b></Button>
+              onClick = {()=> {
+                setAnswer(answer4);
+                CheckAnswer();
+              }}
+              variant="contained"><b>{answer4}</b></Button>
             </Grid>
         </Grid>
       </Grid>
