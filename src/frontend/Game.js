@@ -7,6 +7,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CheckIcon from '@mui/icons-material/Check';
 import useSound from 'use-sound';
 import undertale from '../resources/undertale.m4a';
+import GameService from './Api/Game.js'
 
 const bg ='#e1bee7';
 const question_number = 1;
@@ -19,8 +20,8 @@ function Game() {
     : math_mode==="multiplication" ? "*"
     : "/"
     
-  const [firstNumber, setFirstNumber] = useState(8821);
-  const [secondNumber, setSecondNumber] = useState(1078);
+  const [firstNumber, setFirstNumber] = useState(0);
+  const [secondNumber, setSecondNumber] = useState(0);
   const [options, setOptions] = useState([
     eval(firstNumber+math_sign+secondNumber), 
     eval((firstNumber+5)+math_sign+secondNumber),
@@ -39,33 +40,49 @@ function Game() {
   const [play] = useSound(undertale);
   
   useEffect(() => {
-    if(sec === 0)
-    {
-      GetNextScreen()
+    if (sec === 0) {
+      GetNextQuestion()
     }
-    else if(sec > 0)
-    {
+    else if (sec > 0) {
       setTimeout(() => setSec(sec - 1), 1000);
     }
   })
 
   useEffect(()=>play(),[play])
+  useEffect(()=>GetNextQuestion(),[])
 
-/*this function will be used to change the questions. Eventually we will change the parameters to call the backend functions*/
-  function GetNextScreen()
-  {
+  function GetNextQuestion() {
     setSec(30);
-    setFirstNumber(1234);
-    setSecondNumber(5678);
-    shuffleArray();
+    GameService.getNum().then(res => {
+      setFirstNumber(res.data);
+      GameService.getNum().then(res_ => {
+        setSecondNumber(res_.data);
+        shuffleArray(res.data, res_.data);
+      })
+    })
   }
 
-  function shuffleArray() {
-    for (let i = options.length - 1; i > 0; i--) {
+  function shuffleArray(firstNum, secondNum) {
+    
+    let curr_options = [eval(firstNum+math_sign+secondNum), 
+      eval((firstNum+5)+math_sign+secondNum),
+      eval(firstNum+math_sign+(secondNum+10)),
+      eval((firstNum-5)+math_sign+secondNum)
+    ];
+    for (let i = curr_options.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      const temp = options[i];
-      options[i] = options[j];
-      options[j] = temp;
+      const temp = curr_options[i];
+      curr_options[i] = curr_options[j];
+      curr_options[j] = temp;
+    }
+    setOptions(curr_options);
+  }
+
+  function CheckAnswer(ans) {
+    if (ans === eval(firstNumber+math_sign+secondNumber))
+    {
+      GetNextQuestion()
+      setSecondNumber((score) => score + 1);
     }
   }
 
@@ -107,7 +124,9 @@ function Game() {
               fontSize: "18px",
               color: 'black'
               }} 
-              variant="contained"><b>{options[index]}</b></Button>
+              variant="contained"
+              onClick={()=>CheckAnswer(options[index])}
+            ><b>{options[index]}</b></Button>
           </Grid>
         )}
 
