@@ -217,7 +217,7 @@ function Game(props) {
                 color: 'black'
                 }} 
                 variant="contained"
-                href={`/${math_mode}/singleplayer`}
+                href={`/game/${math_mode}/singleplayer`}
               ><b>Practice Solo</b></Button>
             </Grid>
           </Grid>
