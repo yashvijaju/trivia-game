@@ -96,17 +96,16 @@ function Game() {
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center" sx={{height: '100vh', position: 'fixed', backgroundColor: bg}}>
       <Grid item xs={8} container direction="column" sx={{ backgroundColor: ansCorrect, padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
-        <Typography align="left">
-          <br/>
-            <b>Question {question_number}</b>
-        </Typography>
-        <Typography align="right" variant="h5">
-            <b>Timer<AccessTimeIcon sx={{ fontSize: 20 }}/>: {sec}</b>
-
-        </Typography>
-        <Typography align="right" variant="h5">
-            <b>Score<CheckIcon sx={{ fontSize: 20 }}/>: {score}</b>
-        </Typography>
+        <Grid item xs={12} container direction="row" justifyContent="space-between">
+          <Typography>
+              <b>Question {question_number}</b>
+          </Typography>
+          <Typography>
+              <b><AccessTimeIcon sx={{ fontSize: 15 }}/> Timer: {sec}</b>
+              <br/>
+              <b><CheckIcon sx={{ fontSize: 15 }}/> Score: {score}</b>
+          </Typography>
+        </Grid>
         <Typography align="center" variant="h3">
         <br/>
             <b>{firstNumber} {math_sign} {secondNumber} = ?</b>
