@@ -34,7 +34,7 @@ function Game(props) {
   ];
   const [ansCorrect, setAnsCorrect] = useState("white");
 
-  const [sec, setSec] = useState(5);
+  const [sec, setSec] = useState(120);
   const [score, setScore] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
   const [gameActive, setGameActive] = useState(false);
@@ -75,11 +75,17 @@ function Game(props) {
   }
 
   function shuffleArray(firstNum, secondNum) {
-    
+    let rand_1 = 0;
+    let rand_2 = 0;
+    let rand_3 = 0;
+    while (rand_1 == 0) rand_1 = Math.floor(Math.random()*21) - 10;
+    while (rand_2 == 0 || rand_1 == rand_2) rand_2 = Math.floor(Math.random()*21) - 10;
+    while (rand_3 == 0) rand_3 = Math.floor(Math.random()*21) - 10;
+
     let curr_options = [eval(firstNum+math_sign+secondNum), 
-      eval((firstNum+5)+math_sign+secondNum),
-      eval(firstNum+math_sign+(secondNum+10)),
-      eval((firstNum-5)+math_sign+secondNum)
+      eval((firstNum+rand_1)+math_sign+secondNum),
+      eval(firstNum+math_sign+(secondNum+rand_2)),
+      eval((firstNum-rand_3)+math_sign+secondNum)
     ];
     for (let i = curr_options.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
