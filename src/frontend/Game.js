@@ -10,10 +10,8 @@ import undertale from '../resources/undertale.m4a';
 import GameService from './Api/Game.js'
 
 const bg ='#e1bee7';
-const question_number = 1;
-const filler = ' ';
 
-function Game() {
+function Game(props) {
   const { math_mode, player_mode } = useParams();
   const math_sign = math_mode==="addition" ? "+"
     : math_mode==="subtraction" ? "-"
@@ -36,28 +34,37 @@ function Game() {
   ];
   const [ansCorrect, setAnsCorrect] = useState("white");
 
-  const [sec, setSec] = React.useState(30);
-  const [score, setScore] = React.useState(0);
+  const [sec, setSec] = useState(5);
+  const [score, setScore] = useState(0);
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [gameActive, setGameActive] = useState(false);
   const [play] = useSound(undertale);
-  const [timerId, setTimerId] = useState();
+  // const [timerId, setTimerId] = useState();
   
   useEffect(() => {
-    if (sec === 0) {
-      CheckAnswer(eval(firstNumber+math_sign+secondNumber)+1);
-    } else if (sec === 30) {
-      clearTimeout(timerId);
-      setTimerId(setTimeout(() => setSec(sec - 1), 1000))
-    } else if (sec > 0) {
-      setTimerId(setTimeout(() => setSec(sec - 1), 1000))
-    }
+    // code for 30-second timer per question
+    // if (sec === 0) {
+    //   CheckAnswer(eval(firstNumber+math_sign+secondNumber)+1);
+    // } else if (sec === 30) {
+    //   clearTimeout(timerId);
+    //   setTimerId(setTimeout(() => setSec(sec - 1), 1000))
+    // } else if (sec > 0) {
+    //   setTimerId(setTimeout(() => setSec(sec - 1), 1000))
+    // }
+    if (gameActive && sec === 0) GameOver();
+    else if (gameActive) setTimeout(() => setSec(sec - 1), 1000)
   }, [sec])
+
+  useEffect(() => {
+    setTimeout(() => setSec(sec - 1), 1000)
+  }, [gameActive])
 
   useEffect(()=>play(),[play])
   useEffect(()=>GetNextQuestion(),[])
 
   function GetNextQuestion() {
     setAnsCorrect("white");
-    setSec(30);
+    // setSec(30);
     GameService.getNum().then(res => {
       setFirstNumber(res.data);
       GameService.getNum().then(res_ => {
@@ -89,55 +96,174 @@ function Game() {
       setScore((score) => score + 1);
     } else {
       setAnsCorrect("red");
+      setScore((score) => score - 1);
     }
     setTimeout(() => GetNextQuestion(), 500);
   }
 
+  function GameOver() {
+    setGameActive(false);
+    setIsGameOver(true);
+  }
+
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center" sx={{height: '100vh', position: 'fixed', backgroundColor: bg}}>
-      <Grid item xs={8} container direction="column" sx={{ backgroundColor: ansCorrect, padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
-        <Grid item xs={12} container direction="row" justifyContent="space-between">
-          <Typography>
-              <b>Question {question_number}</b>
-          </Typography>
-          <Typography>
+      {
+        gameActive ?
+        <Grid item xs={8} container direction="column" sx={{ backgroundColor: ansCorrect, padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
+          <Grid item xs={12} container direction="row" justifyContent="space-between">
+            <Typography>
               <b><AccessTimeIcon sx={{ fontSize: 15 }}/> Timer: {sec}</b>
-              <br/>
+            </Typography>
+            <Typography>
               <b><CheckIcon sx={{ fontSize: 15 }}/> Score: {score}</b>
-          </Typography>
-        </Grid>
-        <Typography align="center" variant="h3">
-        <br/>
-            <b>{firstNumber} {math_sign} {secondNumber} = ?</b>
-        </Typography>
-        <Typography align="center" variant="h3">
-        </Typography>
-        <Typography align="center" variant="h3">
-        <br/>
-        </Typography>
-        <Typography align="center" variant="h3">
-        <br/>
-        </Typography>
-        <Grid item xs={6} container direction="row" spacing={1}>
-
-        {colors.map((curr_color, index)=>
-          <Grid item xs={6}>
-            <Button style={{
-              width: '100%',
-              borderRadius: 7,
-              backgroundColor: curr_color, 
-              padding: "9px 18px",
-              fontSize: "18px",
-              color: 'black'
-              }} 
-              variant="contained"
-              onClick={()=>CheckAnswer(options[index])}
-            ><b>{options[index]}</b></Button>
+            </Typography>
           </Grid>
-        )}
-
+          <Typography align="center" variant="h3">
+            <br/>
+            <b>{firstNumber} {math_sign} {secondNumber} = ?</b>
+          </Typography>
+          <br/><br/><br/>
+          <Grid item xs={6} container direction="row" spacing={1}>
+            {colors.map((curr_color, index)=>
+              <Grid item xs={6}>
+                <Button style={{
+                  width: '100%',
+                  borderRadius: 7,
+                  backgroundColor: curr_color, 
+                  padding: "9px 18px",
+                  fontSize: "18px",
+                  color: 'black'
+                  }} 
+                  variant="contained"
+                  onClick={()=>CheckAnswer(options[index])}
+                ><b>{options[index]}</b></Button>
+              </Grid>
+            )}
+          </Grid>
         </Grid>
-      </Grid>
+        : isGameOver ?
+        <Grid item xs={8} container direction="column" sx={{ backgroundColor: ansCorrect, padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
+          <Typography align="center" variant="h5">
+            <br/>
+            <b>Game Over!</b>
+            <br/>
+            <b>Your Score: {score}</b>
+          </Typography>
+          <br/><br/><br/>
+          <Grid item xs={6} container direction="row" spacing={1}>
+            <Grid item xs={6}>
+              <Button style={{
+                width: '100%',
+                borderRadius: 7,
+                backgroundColor: colors[0], 
+                padding: "9px 18px",
+                fontSize: "18px",
+                color: 'black'
+                }} 
+                variant="contained"
+                href="/"
+              ><b>Go Home</b></Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button style={{
+                width: '100%',
+                borderRadius: 7,
+                backgroundColor: colors[1], 
+                padding: "9px 18px",
+                fontSize: "18px",
+                color: 'black'
+                }} 
+                variant="contained"
+                onClick={()=>window.location.reload()}
+              ><b>Play Again</b></Button>
+            </Grid>
+          </Grid>
+        </Grid>
+        : player_mode==="multiplayer" ?
+        <Grid item xs={8} container direction="column" sx={{ backgroundColor: ansCorrect, padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
+          <Typography align="center" variant="h5">
+            <br/>
+            <b>Waiting for opponent...</b>
+          </Typography>
+          <br/>
+          <Typography align="center">
+            Answer the questions before your opponent, and before the time runs out!
+            <br/>
+            {!props.isLoggedIn && "Please log in to save your highscores to the leaderboard!"}
+          </Typography>
+          <br/><br/>
+          <Grid item xs={6} container direction="row" spacing={1}>
+            <Grid item xs={6}>
+              <Button style={{
+                width: '100%',
+                borderRadius: 7,
+                backgroundColor: colors[0], 
+                padding: "9px 18px",
+                fontSize: "18px",
+                color: 'black'
+                }} 
+                variant="contained"
+                href="/"
+              ><b>Go Home</b></Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button style={{
+                width: '100%',
+                borderRadius: 7,
+                backgroundColor: colors[1], 
+                padding: "9px 18px",
+                fontSize: "18px",
+                color: 'black'
+                }} 
+                variant="contained"
+                href={`/${math_mode}/singleplayer`}
+              ><b>Practice Solo</b></Button>
+            </Grid>
+          </Grid>
+        </Grid>
+        :
+        <Grid item xs={8} container direction="column" sx={{ backgroundColor: ansCorrect, padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
+          <Typography align="center" variant="h5">
+            <br/>
+            <b>Practice Mode</b>
+          </Typography>
+          <br/>
+          <Typography align="center">
+            Answer as many questions as you can before the time runs out! <br/>
+            (These scores will not be added to the leaderboard!)
+          </Typography>
+          <br/><br/>
+          <Grid item xs={6} container direction="row" spacing={1}>
+            <Grid item xs={6}>
+              <Button style={{
+                width: '100%',
+                borderRadius: 7,
+                backgroundColor: colors[0], 
+                padding: "9px 18px",
+                fontSize: "18px",
+                color: 'black'
+                }} 
+                variant="contained"
+                href="/"
+              ><b>Go Home</b></Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button style={{
+                width: '100%',
+                borderRadius: 7,
+                backgroundColor: colors[1], 
+                padding: "9px 18px",
+                fontSize: "18px",
+                color: 'black'
+                }} 
+                variant="contained"
+                onClick={()=>setGameActive(true)}
+              ><b>Start</b></Button>
+            </Grid>
+          </Grid>
+        </Grid>
+      }
     </Grid>
 
   );
