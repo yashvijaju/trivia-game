@@ -26,8 +26,8 @@ export default function MediaCard2() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Play Multiplayer</Button>
-        <Button size="small">Solo Practice</Button>
+        <Button size="small" href="/game/multiplication/multiplayer">Play Multiplayer</Button>
+        <Button size="small" href="/game/multiplication/singleplayer">Solo Practice</Button>
       </CardActions>
     </Card>
   );
