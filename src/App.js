@@ -6,12 +6,12 @@ import {
   Route,
 } from "react-router-dom";
 
-import Navbar from "./frontend/Components/Navbar/Navbar"
+import Navbar from "./frontend/Components/Navbar"
 
 
 import Login from './frontend/Login'
 import Signup from './frontend/Signup'
-import GameAddition from './frontend/GameAddition'
+import Game from './frontend/Game'
 import Leaderboard from './frontend/Leaderboard'
 import Home from './frontend/Home'
 
@@ -35,8 +35,8 @@ function App() {
           {isLoggedIn ? <Home/> : <Signup setIsLoggedInGLobal={setIsLoggedIn} setUsernameGlobal={setUsername}/>}
         </Route>
         {/* games */}
-        <Route path="/gameAddition">
-          <GameAddition/>
+        <Route path="/game/:math_mode/:player_mode">
+          <Game/>
         </Route>
         {/* leaderboard */}
         <Route path="/leaderboard">

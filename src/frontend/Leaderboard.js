@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "./Components/Navbar/Navbar";
 import MediaCard from "./Components/Trial"
 import MediaCard1 from "./Components/sub"
 import MediaCard2 from "./Components/multi"
@@ -15,11 +14,7 @@ import "./styling.css"
 
 function Leaderboard() {
   return (
-    <>
-      <>
-        <Navbar />
-      </>
-      
+    <>      
       <Grid>
         </Grid>
         <br />
