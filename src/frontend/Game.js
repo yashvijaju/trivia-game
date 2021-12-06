@@ -8,6 +8,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import useSound from 'use-sound';
 import undertale from '../resources/undertale.m4a';
 import GameService from './Api/Game.js'
+import UserService from './Api/User.js'
 
 const bg ='#e1bee7';
 
@@ -34,7 +35,7 @@ function Game(props) {
   ];
   const [ansCorrect, setAnsCorrect] = useState("white");
 
-  const [sec, setSec] = useState(120);
+  const [sec, setSec] = useState(5);
   const [score, setScore] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
   const [gameActive, setGameActive] = useState(false);
@@ -110,6 +111,9 @@ function Game(props) {
   function GameOver() {
     setGameActive(false);
     setIsGameOver(true);
+    alert(props.username);
+    // UserService.updateHighScore(props.username, math_mode, score).then(res => {
+    // })
   }
 
   return (

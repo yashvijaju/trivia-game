@@ -15,6 +15,10 @@ class UserService {
     createUser(username, password){
         return axios.post(USER_API_BASE_URL, {username, password});
     }
+
+    updateHighScore(username, math_mode, score) {
+        return axios.post(USER_API_BASE_URL + '/' + username + "/" + math_mode + "/" + score);
+    }
 }
 
 export default new UserService()
