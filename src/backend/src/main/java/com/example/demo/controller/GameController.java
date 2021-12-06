@@ -67,6 +67,7 @@ public class GameController {
     {
         Game game_cur = gameRepository.findGameByID(gameID);
         game_cur.increment1();
+        gameRepository.save(game_cur);
     }
 
     @GetMapping("/games/player2_increment/{gameID}")
@@ -74,6 +75,7 @@ public class GameController {
     {
         Game game_cur = gameRepository.findGameByID(gameID);
         game_cur.increment2();
+        gameRepository.save(game_cur);
     }
 
     @GetMapping("/games/player1_decrement/{gameID}")
@@ -81,6 +83,7 @@ public class GameController {
     {
         Game game_cur = gameRepository.findGameByID(gameID);
         game_cur.decrement1();
+        gameRepository.save(game_cur);
     }
 
     @GetMapping("/games/player2_decrement/{gameID}")
@@ -88,6 +91,7 @@ public class GameController {
     {
         Game game_cur = gameRepository.findGameByID(gameID);
         game_cur.decrement2();
+        gameRepository.save(game_cur);
     }
 
 
@@ -95,24 +99,28 @@ public class GameController {
 
 
     @GetMapping("/games/player1_get_score/{gameID}")
-    public void getScoreOne(@PathVariable(value = "gameID") int gameID)
+    public int getScoreOne(@PathVariable(value = "gameID") int gameID)
     {
         Game game_cur = gameRepository.findGameByID(gameID);
-        game_cur.getPlayer1Score();
+        gameRepository.save(game_cur);
+        return game_cur.getPlayer1Score();
     }
 
     @GetMapping("/games/player2_get_score/{gameID}")
-    public void getScoreTwo(@PathVariable(value = "gameID") int gameID)
+    public int getScoreTwo(@PathVariable(value = "gameID") int gameID)
     {
         Game game_cur = gameRepository.findGameByID(gameID);
-        game_cur.getPlayer2Score();
+        gameRepository.save(game_cur);
+        return game_cur.getPlayer2Score();
     }
 
     @GetMapping("games/is_player2_found/{gameID}")
-    public boolean isPlayerTwoFound(@PathVariable(value = "gameID") int gameID)
+    public Boolean isPlayerTwoFound(@PathVariable(value = "gameID") int gameID)
     {
         Game game_cur = gameRepository.findGameByID(gameID);
-        return game_cur.isPlayerTwoFound();
+        System.out.println(game_cur.isPlayerTwoFound());
+        if(game_cur.isPlayerTwoFound()) return true;
+        return false;
     }
 
     

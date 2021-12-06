@@ -71,18 +71,6 @@ function Game(props) {
     if(!gameActive && player_mode==="multiplayer")
     {
       multiplayer();
-      if(playerNumber===1)
-      {
-        while(true)
-        {
-          let isFound = false;
-          GameService.isPlayerTwoFound().then(res => {
-            if(res.data) isFound = true;
-          })
-          if(isFound) break;
-        }
-        setGameActive(true);
-      }
     }
     setTimeout(() => setSec(sec - 1), 1000)
   }, [gameActive])
@@ -104,11 +92,22 @@ function Game(props) {
 
   function multiplayer()
   {
-    GameService.findLobby("Will").then(res => {
+    
+    GameService.findLobby(localStorage.getItem("username")).then(res => {
       if(!res.data)
       {
-        GameService.createLobby("Will").then(res_ => {
+        GameService.createLobby(localStorage.getItem("username")).then(res_ => {
         setPlayerNumber(1);
+        while(true)
+        {
+          let isFound = false;
+          GameService.isPlayerTwoFound(gameID).then(response => {
+            alert(response.data);
+            if(response.data) isFound = true;
+          })
+          if(isFound) break;
+        }
+        setGameActive(true);
       });
       }
       else{
@@ -116,6 +115,7 @@ function Game(props) {
         setGameID(res.data);
         setGameActive(true);
       }
+
     })
   }
 
@@ -161,7 +161,6 @@ function Game(props) {
   function GameOver() {
     setGameActive(false);
     setIsGameOver(true);
-    alert(props.username);
     // UserService.updateHighScore(props.username, math_mode, score).then(res => {
     // })
   }
