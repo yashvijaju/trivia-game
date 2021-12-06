@@ -27,16 +27,23 @@ function Game(props) {
     eval(firstNumber+math_sign+(secondNumber+10)),
     eval((firstNumber-5)+math_sign+secondNumber)
   ]);
+
   const colors = [
     "#26c6da",
     "#f48fb1",
     "#ffb74d",
     "#81c784"
   ];
-  const [ansCorrect, setAnsCorrect] = useState("white");
 
-  const [sec, setSec] = useState(5);
+  const [gameID, setGameID] = useState(0);
+  const [playerNumber, setPlayerNumber] = useState(0);
+  
+
+  const [ansCorrect, setAnsCorrect] = useState("white");
+  
+  const [sec, setSec] = useState(120);
   const [score, setScore] = useState(0);
+  const [opponentScore, setOpponentScore] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
   const [gameActive, setGameActive] = useState(false);
   const [play] = useSound(undertale);
@@ -53,10 +60,30 @@ function Game(props) {
     //   setTimerId(setTimeout(() => setSec(sec - 1), 1000))
     // }
     if (gameActive && sec === 0) GameOver();
-    else if (gameActive) setTimeout(() => setSec(sec - 1), 1000)
+    else if (gameActive) setTimeout(() => {
+      setSec(sec - 1);
+      if(playerNumber==1) GameService.getPlayerTwoScore(gameID).then(res => setOpponentScore(res.data));
+      else GameService.getPlayerOneScore(gameID).then(res => setOpponentScore(res.data));
+    }, 1000);
   }, [sec])
 
   useEffect(() => {
+    if(!gameActive && player_mode==="multiplayer")
+    {
+      multiplayer();
+      if(playerNumber===1)
+      {
+        while(true)
+        {
+          let isFound = false;
+          GameService.isPlayerTwoFound().then(res => {
+            if(res.data) isFound = true;
+          })
+          if(isFound) break;
+        }
+        setGameActive(true);
+      }
+    }
     setTimeout(() => setSec(sec - 1), 1000)
   }, [gameActive])
 
@@ -72,6 +99,23 @@ function Game(props) {
         setSecondNumber(res_.data);
         shuffleArray(res.data, res_.data);
       })
+    })
+  }
+
+  function multiplayer()
+  {
+    GameService.findLobby("Will").then(res => {
+      if(!res.data)
+      {
+        GameService.createLobby("Will").then(res_ => {
+        setPlayerNumber(1);
+      });
+      }
+      else{
+        setPlayerNumber(2);
+        setGameID(res.data);
+        setGameActive(true);
+      }
     })
   }
 
@@ -101,9 +145,15 @@ function Game(props) {
     if (ans === eval(firstNumber+math_sign+secondNumber)) {
       setAnsCorrect("green");
       setScore((score) => score + 1);
+      if(playerNumber === 1) GameService.incrementPlayerOneScore(gameID);
+      else GameService.incrementPlayerTwoScore(gameID);
+      
     } else {
       setAnsCorrect("red");
       setScore((score) => score - 1);
+      if(playerNumber === 1) GameService.decrementPlayerOneScore(gameID);
+      else GameService.decrementPlayerTwoScore(gameID);
+      
     }
     setTimeout(() => GetNextQuestion(), 500);
   }
@@ -127,6 +177,7 @@ function Game(props) {
             </Typography>
             <Typography>
               <b><CheckIcon sx={{ fontSize: 15 }}/> Score: {score}</b>
+              {player_mode==="multiplayer" && <b><CheckIcon sx={{ fontSize: 15 }}/><br/> Opponent Score: {opponentScore}</b>}
             </Typography>
           </Grid>
           <Typography align="center" variant="h3">
