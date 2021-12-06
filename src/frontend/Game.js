@@ -7,6 +7,9 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CheckIcon from '@mui/icons-material/Check';
 import useSound from 'use-sound';
 import undertale from '../resources/undertale.m4a';
+import metalCrusher from '../resources/metalCrusher.m4a';
+import ghostFight from '../resources/ghostFight.m4a';
+import hotel from '../resources/hotel.m4a';
 import GameService from './Api/Game.js'
 import UserService from './Api/User.js'
 
@@ -46,7 +49,8 @@ function Game(props) {
   const [opponentScore, setOpponentScore] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
   const [gameActive, setGameActive] = useState(false);
-  const [play] = useSound(undertale);
+  const [play] = useSound(math_mode === "addition" ? undertale : math_mode === "subtraction" ? ghostFight 
+  : math_mode === "multiplication" ? hotel : metalCrusher)
   // const [timerId, setTimerId] = useState();
   
   useEffect(() => {
