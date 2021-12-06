@@ -4,11 +4,11 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
 
-import com.example.demo.model.User;
+import com.example.demo.model.Addition;
 
-public interface AdditionLeaderboardRepository extends MongoRepository<User, String>{
+public interface AdditionLeaderboardRepository extends MongoRepository<Addition, String>{
 
     @Query(value="{ '_id' : '?0'}")
-    User findUser(String username);
+    Addition findUser(String username);
 }
 

@@ -4,38 +4,29 @@ import java.util.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "addition")
-
+@Document(collection = "addition_leaderboard")
 public class Addition {
     
-    @Id
-    private int id = 1;
-
-    
+    @Id    
     private String player_ID;
     private int player_score;
 
-    public void updateScore(int score)
-    {
-        if(player_score < score)
-        {
+    public void updateScore(int score) {
+        if (player_score < score) {
             player_score = score;
         }
     }
 
-    public int getPlayerScore()
-    {
+    public int getPlayerScore() {
         return player_score;
     }
 
-    public Addition(String playeroneID)
-    {
+    public Addition(String playeroneID) {
         this.player_ID = playeroneID;
         player_score = 0;
     }
 
-    public boolean isPlayerFound()
-    {
+    public boolean isPlayerFound() {
         if(player_ID.equals("")) return false;
         return true;
     }
