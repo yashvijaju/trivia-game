@@ -96,19 +96,21 @@ function Game(props) {
     GameService.findLobby(localStorage.getItem("username")).then(res => {
       if(!res.data)
       {
-        GameService.createLobby(localStorage.getItem("username")).then(res_ => {
-        setPlayerNumber(1);
-        while(true)
+        GameService.createLobby(localStorage.getItem("username")).then(res_ => 
         {
-          let isFound = false;
-          GameService.isPlayerTwoFound(gameID).then(response => {
-            alert(response.data);
-            if(response.data) isFound = true;
-          })
-          if(isFound) break;
-        }
-        setGameActive(true);
-      });
+          setPlayerNumber(1);
+            while(true)
+            {
+              let isFound = false;
+              GameService.isPlayerTwoFound(gameID).then(response => 
+              {
+                alert(response.data);
+                if(response.data) isFound = true;
+              })
+              if(isFound) break;
+            }
+            setGameActive(true);
+          });
       }
       else{
         setPlayerNumber(2);
