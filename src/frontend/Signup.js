@@ -34,6 +34,7 @@ export default function Signup(props) {
           User.createUser(username, password).then(res_ => {
             props.setIsLoggedInGLobal(true);
             props.setUsernameGlobal(username);
+            localStorage.setItem('username', username)
             history.push("/");
           });
         }

@@ -55,11 +55,11 @@ export default function Navbar(props) {
           </IconButton>
           {props.isLoggedIn && 
             <IconButton
-                size="large"
-                aria-label="leaderboard"
-                href="/leaderboard"
-                color="inherit"
-              >
+              size="large"
+              aria-label="leaderboard"
+              href="/leaderboard"
+              color="inherit"
+            >
               <LeaderboardIcon />
             </IconButton>
           }
@@ -96,7 +96,11 @@ export default function Navbar(props) {
               {props.isLoggedIn ?
                 <>
                   
-                  <MenuItem onClick={()=>{props.setIsLoggedIn(false);handleClose()}}>Sign Out</MenuItem>
+                  <MenuItem onClick={()=>{
+                    props.setIsLoggedIn(false);
+                    localStorage.clear();
+                    handleClose()
+                  }}>Sign Out</MenuItem>
                 </>
               :
                 <>
