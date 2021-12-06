@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Addition {
     
     @Id    
-    private String player_ID;
+    private String player_username;
     private int player_score;
 
     public void updateScore(int score) {
@@ -21,13 +21,13 @@ public class Addition {
         return player_score;
     }
 
-    public Addition(String playeroneID) {
-        this.player_ID = playeroneID;
+    public Addition(String player_one_username) {
+        this.player_username = player_one_username;
         player_score = 0;
     }
 
     public boolean isPlayerFound() {
-        if(player_ID.equals("")) return false;
+        if(player_username.equals("")) return false;
         return true;
     }
 
