@@ -56,6 +56,8 @@ function Game(props) {
   }, [sec])
 
   useEffect(() => {
+    if(!gameActive && player_mode==="multiplayer")
+    {multiplayer();}
     setTimeout(() => setSec(sec - 1), 1000)
   }, [gameActive])
 
@@ -71,6 +73,17 @@ function Game(props) {
         setSecondNumber(res_.data);
         shuffleArray(res.data, res_.data);
       })
+    })
+  }
+
+  function multiplayer()
+  {
+    GameService.findLobby("Yashvi").then(res => {
+      if(!res.data)
+      {
+        GameService.createLobby("Yashvi").then(res_ => {
+        });
+      }
     })
   }
 

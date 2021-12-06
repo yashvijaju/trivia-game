@@ -36,7 +36,7 @@ function App() {
         </Route>
         {/* games */}
         <Route path="/game/:math_mode/:player_mode">
-          <Game isLoggedIn={isLoggedIn} />
+          <Game isLoggedIn={isLoggedIn} username={username}/>
         </Route>
         {/* leaderboard */}
         <Route path="/leaderboard">
