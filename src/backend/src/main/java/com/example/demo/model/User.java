@@ -21,10 +21,10 @@ public class User {
         this.password = password;
         this.score = 0;
         high_scores = new TreeMap<String,Integer>();
-        this.high_scores.put("Addition", 0);
-        this.high_scores.put("Subtraction", 0);
-        this.high_scores.put("Multiplication", 0);
-        this.high_scores.put("Division", 0);
+        this.high_scores.put("addition", 0);
+        this.high_scores.put("subtraction", 0);
+        this.high_scores.put("multiplication", 0);
+        this.high_scores.put("division", 0);
     }
 
     public User getUser(String username) {
@@ -38,5 +38,9 @@ public class User {
 
     public TreeMap<String,Integer> getHighScore() {
         return high_scores;
+    }
+
+    public void updateScore(TreeMap<String,Integer> new_scores) {
+        high_scores = new_scores;
     }
 }
