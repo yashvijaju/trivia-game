@@ -21,6 +21,9 @@ public interface GameRepository extends MongoRepository<Game, String> {
         return null;
     }*/
     
-    @Query(value="{'playertwoID' : ''}")
+    @Query(value="{'playertwoID' : '' }")
     Game findGame();
+
+    @Query( value="{'_id' : '?0' }")
+    Game findGameByID(int id);
 }

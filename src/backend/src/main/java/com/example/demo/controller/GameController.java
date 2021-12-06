@@ -38,7 +38,7 @@ public class GameController {
         return rando;
     }
 
-    @GetMapping("/games/{playertwoID}")
+    @GetMapping("/games/find_lobby/{playertwoID}")
     public int findLobby(@PathVariable(value = "playertwoID") String playertwoID)
     {
         Game game = gameRepository.findGame();
@@ -51,11 +51,68 @@ public class GameController {
         return 0;
     }
 
-    @PostMapping("/games/{playeroneID}")
-    public Game createLobby(@PathVariable(value = "playeroneID") String playeroneID)
+    @PostMapping("/games/create_lobby/{playeroneID}")
+    public int createLobby(@PathVariable(value = "playeroneID") String playeroneID)
     {
         Game game_new = new Game(playeroneID);
-        return gameRepository.save(game_new);
+        gameRepository.save(game_new);
+        return game_new.getId();
+    }
+
+
+
+
+    @GetMapping("/games/player1_increment/{gameID}")
+    public void incrementOne(@PathVariable(value = "gameID") int gameID)
+    {
+        Game game_cur = gameRepository.findGameByID(gameID);
+        game_cur.increment1();
+    }
+
+    @GetMapping("/games/player2_increment/{gameID}")
+    public void incrementTwo(@PathVariable(value = "gameID") int gameID)
+    {
+        Game game_cur = gameRepository.findGameByID(gameID);
+        game_cur.increment2();
+    }
+
+    @GetMapping("/games/player1_decrement/{gameID}")
+    public void decrementOne(@PathVariable(value = "gameID") int gameID)
+    {
+        Game game_cur = gameRepository.findGameByID(gameID);
+        game_cur.decrement1();
+    }
+
+    @GetMapping("/games/player2_decrement/{gameID}")
+    public void decrementTwo(@PathVariable(value = "gameID") int gameID)
+    {
+        Game game_cur = gameRepository.findGameByID(gameID);
+        game_cur.decrement2();
+    }
+
+
+
+
+
+    @GetMapping("/games/player1_get_score/{gameID}")
+    public void getScoreOne(@PathVariable(value = "gameID") int gameID)
+    {
+        Game game_cur = gameRepository.findGameByID(gameID);
+        game_cur.getPlayer1Score();
+    }
+
+    @GetMapping("/games/player2_get_score/{gameID}")
+    public void getScoreTwo(@PathVariable(value = "gameID") int gameID)
+    {
+        Game game_cur = gameRepository.findGameByID(gameID);
+        game_cur.getPlayer2Score();
+    }
+
+    @GetMapping("games/is_player2_found/{gameID}")
+    public boolean isPlayerTwoFound(@PathVariable(value = "gameID") int gameID)
+    {
+        Game game_cur = gameRepository.findGameByID(gameID);
+        return game_cur.isPlayerTwoFound();
     }
 
     
