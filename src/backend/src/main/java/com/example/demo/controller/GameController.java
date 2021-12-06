@@ -118,7 +118,6 @@ public class GameController {
     public Boolean isPlayerTwoFound(@PathVariable(value = "gameID") int gameID)
     {
         Game game_cur = gameRepository.findGameByID(gameID);
-        System.out.println(game_cur.isPlayerTwoFound());
         if(game_cur.isPlayerTwoFound()) return true;
         return false;
     }

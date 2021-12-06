@@ -90,26 +90,20 @@ function Game(props) {
     })
   }
 
+  function waitForSecondPlayer() {
+    GameService.isPlayerTwoFound(gameID).then(response => {
+      if (response.data) setGameActive(true);
+      else waitForSecondPlayer();
+    })
+  }
+
   function multiplayer()
   {
-    
     GameService.findLobby(localStorage.getItem("username")).then(res => {
-      if(!res.data)
-      {
-        GameService.createLobby(localStorage.getItem("username")).then(res_ => 
-        {
+      if(!res.data) {
+        GameService.createLobby(localStorage.getItem("username")).then(res_ => {
           setPlayerNumber(1);
-            while(true)
-            {
-              let isFound = false;
-              GameService.isPlayerTwoFound(gameID).then(response => 
-              {
-                alert(response.data);
-                if(response.data) isFound = true;
-              })
-              if(isFound) break;
-            }
-            setGameActive(true);
+          waitForSecondPlayer();
           });
       }
       else{
@@ -117,7 +111,6 @@ function Game(props) {
         setGameID(res.data);
         setGameActive(true);
       }
-
     })
   }
 
