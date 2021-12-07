@@ -29,19 +29,19 @@ public class AdditionController {
     
 
     @Autowired
-    private GameRepository additionLeaderboardRepository;
+    private AdditionLeaderboardRepository additionLeaderboardRepository;
 
     @GetMapping("/users/{username}/{math_mode}/{score}")
-    public int getHighScore()
+    public int getHighScore(@PathVariable(value = "username") String username, @PathVariable(value = "score") int score)
     {
 
-        Addition add = additionLeaderboardRepository.findUserByID(username);
+        Addition add = additionLeaderboardRepository.findUser(username);
         if(add != null){
             add.updateScore(score);
             additionLeaderboardRepository.save(add);
         }
         else{
-            Additon new_obj = new Addition(username, score);
+            Addition new_obj = new Addition(username, score);
             additionLeaderboardRepository.save(new_obj);
         }
     }    
