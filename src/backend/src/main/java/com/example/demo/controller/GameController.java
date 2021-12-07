@@ -118,8 +118,8 @@ public class GameController {
     public Boolean isPlayerTwoFound(@PathVariable(value = "gameID") int gameID)
     {
         Game game_cur = gameRepository.findGameByID(gameID);
-        if(game_cur.isPlayerTwoFound()) return true;
-        return false;
+        if (game_cur==null || !game_cur.isPlayerTwoFound()) return false;
+        return true;
     }
 
     

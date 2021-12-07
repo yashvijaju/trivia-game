@@ -333,7 +333,7 @@ function Game(props) {
                 color: 'black'
                 }} 
                 variant="contained"
-                onClick={()=>setGameActive(true)}
+                onClick={()=>{setGameActive(true); setTimeout(() => setSec(sec - 1), 1000)}}
               ><b>Start</b></Button>
             </Grid>
           </Grid>
