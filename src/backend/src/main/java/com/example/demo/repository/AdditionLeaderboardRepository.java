@@ -12,7 +12,7 @@ public interface AdditionLeaderboardRepository extends MongoRepository<Addition,
 
     @Query(value="{ '_id' : '?0' }")
     Addition findUser(String player_username);
-
+    
     ArrayList<Addition> findAll();
 }
 
