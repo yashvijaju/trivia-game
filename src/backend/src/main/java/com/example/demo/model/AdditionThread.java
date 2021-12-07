@@ -11,24 +11,19 @@ public class AdditionThread extends Thread
 	private Lock lck = new ReentrantLock();
 	ArrayList<Addition> arr = new ArrayList<Addition>();
 	private Addition obj;
-	public AdditionThread(Addition object)
-	{
+	public AdditionThread(Addition object) {
 		obj = object;
 	}
 	
-	public void run() 
-	{	
+	public void run() {	
 		lck.lock();
 
-		try
-		{
+		try {
 			int length = arr.size();
-			if(length < 10)
-			{
+			if (length < 10) {
 				arr.add(obj);
 			}
-			else if(length == 10)
-			{
+			else if(length == 10) {
 				if(arr.get(9).getPlayerScore() < obj.getPlayerScore())
 				{
 					arr.set(9,obj);
@@ -36,25 +31,19 @@ public class AdditionThread extends Thread
 			}
 
 			int n = arr.size();
-			for (int i = 0; i < n-1; i++)
-			{
-				for (int j = 0; j < n-i-1; j++)
-				{
-					if (arr.get(j).getPlayerScore() > arr.get(j+1).getPlayerScore())
-					{
+			for (int i = 0; i < n-1; i++) {
+				for (int j = 0; j < n-i-1; j++) {
+					if (arr.get(j).getPlayerScore() > arr.get(j+1).getPlayerScore()) {
 						Collections.swap(arr, j+1,j);
 					}
 				}
 			}
 		}
-		catch(Exception e)
-		{
+		catch(Exception e) {
 			e.printStackTrace();
 		}
-		finally
-		{
+		finally {
 			lck.unlock();
 		}		
 	}
-
 }

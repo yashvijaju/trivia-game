@@ -12,6 +12,7 @@ import ghostFight from '../resources/ghostFight.m4a';
 import hotel from '../resources/hotel.m4a';
 import GameService from './Api/Game.js'
 import UserService from './Api/User.js'
+import LeaderboardService from './Api/Leaderboard'
 
 const bg ='#e1bee7';
 
@@ -177,7 +178,10 @@ function Game(props) {
 
   function GameOver() {
     setGameActive(false);
-    if (score > opponentScore && player_mode==="multiplayer") UserService.updateHighScore(localStorage.getItem("username"), math_mode, score).then(res => {})
+    if (score > opponentScore && score > 0 && player_mode==="multiplayer") {
+      UserService.updateHighScore(localStorage.getItem("username"), math_mode, score);
+      LeaderboardService.updateAdditionHighScore(localStorage.getItem("username"), score);
+    }
   }
 
   return (

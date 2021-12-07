@@ -16,15 +16,29 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 import com.example.demo.exception.ResourceNotFoundException;
-
 import com.example.demo.model.Addition;
 import com.example.demo.repository.AdditionLeaderboardRepository;
 
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/leaderboard/addition")
 public class AdditionController {
-    
+
     @Autowired
     private AdditionLeaderboardRepository additionLeaderboardRepository;
+
+    @GetMapping("/{username}/{score}")
+    public void getHighScore(@PathVariable(value = "username") String username, @PathVariable(value = "score") int score)
+    {
+        Addition add = additionLeaderboardRepository.findUser(username);
+        if (add != null) {
+            add.updateScore(score);
+            additionLeaderboardRepository.save(add);
+        }
+        else {
+            Addition new_obj = new Addition(username, score);
+            additionLeaderboardRepository.save(new_obj);
+        }
+    }    
 }
