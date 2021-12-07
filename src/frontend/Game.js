@@ -44,7 +44,7 @@ function Game(props) {
 
   const [ansCorrect, setAnsCorrect] = useState("white");
   
-  const [sec, setSec] = useState(120);
+  const [sec, setSec] = useState(10);
   const [score, setScore] = useState(0);
   const [opponentScore, setOpponentScore] = useState(0);
   const [gameActive, setGameActive] = useState(false);
@@ -221,9 +221,10 @@ function Game(props) {
         <Grid item xs={8} container direction="column" sx={{ backgroundColor: ansCorrect, padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
           <Typography align="center" variant="h5">
             <br/>
-            <b>Game Over!</b>
+            <b>Game Over! {player_mode==="multiplayer" && (score > opponentScore ? "You won" : score < opponentScore ? "You lost" : "Tie") }</b>
             <br/>
             <b>Your Score: {score}</b>
+            {player_mode==="multiplayer" && <b><br/> Opponent Score: {opponentScore}</b>}
           </Typography>
           <br/><br/><br/>
           <Grid item xs={6} container direction="row" spacing={1}>
@@ -250,8 +251,8 @@ function Game(props) {
                 color: 'black'
                 }} 
                 variant="contained"
-                onClick={()=>window.location.reload()}
-              ><b>Play Again</b></Button>
+                onClick={()=>history.push("/leaderboard")}
+              ><b>Check Leaderboard</b></Button>
             </Grid>
           </Grid>
         </Grid>
