@@ -32,6 +32,7 @@ export default function Login(props) {
           } else {
             props.setIsLoggedInGLobal(true);
             props.setUsernameGlobal(username);
+            localStorage.setItem('username', username)
             history.push("/");
           }
         })

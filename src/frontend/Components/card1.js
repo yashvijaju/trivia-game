@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
+import subtraction from '../../resources/subtraction.png';
 
 export default function MediaCard1() {
   return (
@@ -13,7 +13,8 @@ export default function MediaCard1() {
       <CardMedia
         component="img"
         height="280"
-        image="https://www.theschoolrun.com/sites/theschoolrun.com/files/article_images/subtraction.png"
+        //image="https://www.theschoolrun.com/sites/theschoolrun.com/files/article_images/subtraction.png"
+        img src={subtraction}
         alt="Subtraction"
       />
       <CardContent>

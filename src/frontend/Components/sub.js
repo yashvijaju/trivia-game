@@ -7,15 +7,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
+import subtraction from '../../resources/subtraction.png';
 
 export default function MediaCard1() {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
-        height="200"
-        image="https://pngimg.com/uploads/minus/minus_PNG11.png"
+        height="280"
+        //image="https://pngimg.com/uploads/minus/minus_PNG11.png"
+        img src = {subtraction}
         alt="Subtraction"
       />
       <CardContent>

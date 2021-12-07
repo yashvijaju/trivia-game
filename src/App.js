@@ -20,6 +20,11 @@ function App() {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
+    const loggedInUser = localStorage.getItem("username");
+    if (loggedInUser) {
+      setIsLoggedIn(true);
+      setUsername(loggedInUser);
+    }
   }, [isLoggedIn])
 
   return (
@@ -36,7 +41,7 @@ function App() {
         </Route>
         {/* games */}
         <Route path="/game/:math_mode/:player_mode">
-          <Game/>
+          <Game isLoggedIn={isLoggedIn} username={username}/>
         </Route>
         {/* leaderboard */}
         <Route path="/leaderboard">

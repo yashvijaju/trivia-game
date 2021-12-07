@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
+import multiplication from '../../resources/multiplication.png';
 
 export default function MediaCard2() {
   return (
@@ -13,7 +13,8 @@ export default function MediaCard2() {
       <CardMedia
         component="img"
         height="280"
-        image="https://www.theschoolrun.com/sites/theschoolrun.com/files/article_images/multiplication.png"
+        //image="https://www.theschoolrun.com/sites/theschoolrun.com/files/article_images/multiplication.png"
+        img src={multiplication}
         alt="Multiplication"
       />
       <CardContent>
@@ -23,6 +24,7 @@ export default function MediaCard2() {
         <Typography variant="body2" color="text.secondary">
         Essentially, to multiply numbers is to add groups of a 
         number. Multiplying means repeated addition of a number.
+        When you multiply two numbers you get the product.
         </Typography>
       </CardContent>
       <CardActions>
