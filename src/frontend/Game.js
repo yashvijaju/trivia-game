@@ -44,7 +44,7 @@ function Game(props) {
 
   const [ansCorrect, setAnsCorrect] = useState("white");
   
-  const [sec, setSec] = useState(10);
+  const [sec, setSec] = useState(120);
   const [score, setScore] = useState(0);
   const [opponentScore, setOpponentScore] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
