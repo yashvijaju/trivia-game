@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import {Button, TextField, Typography, Grid} from '@mui/material';
 import { blue } from "@mui/material/colors";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -50,8 +50,19 @@ function Game(props) {
   const [gameActive, setGameActive] = useState(false);
   const [play] = useSound(math_mode === "addition" ? undertale : math_mode === "subtraction" ? ghostFight 
   : math_mode === "multiplication" ? hotel : metalCrusher)
-  // const [timerId, setTimerId] = useState();
-  
+  const history = useHistory();
+
+  useEffect(() => {
+    if (player_mode === "multiplayer" && (localStorage.getItem("username") === null)) {
+      let input_box = window.confirm("You need to log-in to play against an opponent.");
+      if (input_box == true) {
+        history.push("/login");
+      } else {
+        history.push("/");
+      }
+    }
+  }, [])
+
   useEffect(() => {
     // code for 30-second timer per question
     // if (sec === 0) {

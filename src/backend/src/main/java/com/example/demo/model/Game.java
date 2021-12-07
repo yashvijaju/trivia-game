@@ -25,7 +25,7 @@ public class Game {
         player1score = 0;
         player2score = 0;
 
-        int rand_num = (int)(Math.random()*10000);
+        int rand_num = (int)(Math.random()*1000000);
         id = rand_num;
     }
 
