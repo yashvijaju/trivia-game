@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
+import addition from '../../resources/addition.png';
 
 export default function MediaCard() {
   return (
@@ -13,7 +13,8 @@ export default function MediaCard() {
       <CardMedia
         component="img"
         height="280"
-        image="https://www.theschoolrun.com/sites/theschoolrun.com/files/article_images/addition.jpg"
+        //image="https://www.theschoolrun.com/sites/theschoolrun.com/files/article_images/addition.jpg"
+        img src={addition}
         alt="Additon"
       />
       <CardContent>
@@ -21,8 +22,7 @@ export default function MediaCard() {
           Addition
         </Typography>
         <Typography variant="body2" color="text.secondary">
-        Addition is one of the four basic operations of arithmetic, 
-        the other three being subtraction, multiplication and division. 
+        Addition is one of the four basic operations of arithmetic,  
         The addition of two whole numbers results in the total amount or 
         sum of those values combined.
         </Typography>

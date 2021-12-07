@@ -7,15 +7,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
+import multiplication from '../../resources/multiplication.png';
 
 export default function MediaCard2() {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
-        height="200"
-        image="https://cdn.pixabay.com/photo/2013/07/12/14/11/cross-147923_1280.png"
+        height="280"
+        //image="https://cdn.pixabay.com/photo/2013/07/12/14/11/cross-147923_1280.png"
+        img src = {multiplication}
         alt="Multiplication"
       />
       <CardContent>

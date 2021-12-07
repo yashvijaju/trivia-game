@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import division from '../../resources/division.png';
 
 
 export default function MediaCard3() {
@@ -13,7 +14,8 @@ export default function MediaCard3() {
       <CardMedia
         component="img"
         height="280"
-        image="https://www.theschoolrun.com/sites/theschoolrun.com/files/article_images/division.png"
+        img src={division}
+        //image="https://www.theschoolrun.com/sites/theschoolrun.com/files/article_images/division.png"
         alt="Division"
       />
       <CardContent>
