@@ -44,7 +44,7 @@ function Game(props) {
 
   const [ansCorrect, setAnsCorrect] = useState("white");
   
-  const [sec, setSec] = useState(120);
+  const [sec, setSec] = useState(10);
   const [score, setScore] = useState(0);
   const [opponentScore, setOpponentScore] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
@@ -66,8 +66,10 @@ function Game(props) {
     if (gameActive && sec === 0) GameOver();
     else if (gameActive) setTimeout(() => {
       setSec(sec - 1);
-      if(playerNumber==1) GameService.getPlayerTwoScore(gameID).then(res => setOpponentScore(res.data));
-      else GameService.getPlayerOneScore(gameID).then(res => setOpponentScore(res.data));
+      if (math_mode === "multiplayer") {
+        if (playerNumber==1) GameService.getPlayerTwoScore(gameID).then(res => setOpponentScore(res.data));
+        else GameService.getPlayerOneScore(gameID).then(res => setOpponentScore(res.data));
+      }
     }, 1000);
   }, [sec])
 
@@ -144,14 +146,17 @@ function Game(props) {
     if (ans === eval(firstNumber+math_sign+secondNumber)) {
       setAnsCorrect("green");
       setScore((score) => score + 1);
-      if(playerNumber === 1) GameService.incrementPlayerOneScore(gameID);
-      else GameService.incrementPlayerTwoScore(gameID);
-      
+      if (math_mode === "multiplayer") {
+        if (playerNumber === 1) GameService.incrementPlayerOneScore(gameID);
+        else GameService.incrementPlayerTwoScore(gameID);
+      }
     } else {
       setAnsCorrect("red");
       setScore((score) => score - 1);
-      if(playerNumber === 1) GameService.decrementPlayerOneScore(gameID);
-      else GameService.decrementPlayerTwoScore(gameID);
+      if (math_mode === "multiplayer") {
+        if (playerNumber === 1) GameService.decrementPlayerOneScore(gameID);
+        else GameService.decrementPlayerTwoScore(gameID);
+      }
       
     }
     setTimeout(() => GetNextQuestion(), 500);
@@ -160,8 +165,7 @@ function Game(props) {
   function GameOver() {
     setGameActive(false);
     setIsGameOver(true);
-    // UserService.updateHighScore(props.username, math_mode, score).then(res => {
-    // })
+    if (player_mode==="multiplayer") UserService.updateHighScore(localStorage.getItem("username"), math_mode, score).then(res => {})
   }
 
   return (
