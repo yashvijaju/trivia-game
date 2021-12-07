@@ -27,99 +27,22 @@ import com.example.demo.repository.GameRepository;
 @RequestMapping("/api/v1/")
 public class AdditionController {
     
+
     @Autowired
     private GameRepository additionLeaderboardRepository;
 
-    @GetMapping("/games/get_number")
-    public int getNum()
+    @GetMapping("/users/{username}/{math_mode}/{score}")
+    public int getHighScore()
     {
-        int rando = (int)(Math.random()*100);
-        return rando;
-    }
 
-    @GetMapping("/games/find_lobby/{playertwoID}")
-    public int findLobby(@PathVariable(value = "playertwoID") String playertwoID)
-    {
-        Game game = gameRepository.findGame();
-        if(game!=null)
-        {
-            game.addPlayerTwo(playertwoID);
-            gameRepository.save(game);
-            return game.getId();
+        Addition add = additionLeaderboardRepository.findUserByID(username);
+        if(add != null){
+            add.updateScore(score);
+            additionLeaderboardRepository.save(add);
         }
-        return 0;
-    }
-
-    @PostMapping("/games/create_lobby/{playeroneID}")
-    public int createLobby(@PathVariable(value = "playeroneID") String playeroneID)
-    {
-        Game game_new = new Game(playeroneID);
-        gameRepository.save(game_new);
-        return game_new.getId();
-    }
-
-
-
-
-    @GetMapping("/games/player1_increment/{gameID}")
-    public void incrementOne(@PathVariable(value = "gameID") int gameID)
-    {
-        Game game_cur = gameRepository.findGameByID(gameID);
-        game_cur.increment1();
-        gameRepository.save(game_cur);
-    }
-
-    @GetMapping("/games/player2_increment/{gameID}")
-    public void incrementTwo(@PathVariable(value = "gameID") int gameID)
-    {
-        Game game_cur = gameRepository.findGameByID(gameID);
-        game_cur.increment2();
-        gameRepository.save(game_cur);
-    }
-
-    @GetMapping("/games/player1_decrement/{gameID}")
-    public void decrementOne(@PathVariable(value = "gameID") int gameID)
-    {
-        Game game_cur = gameRepository.findGameByID(gameID);
-        game_cur.decrement1();
-        gameRepository.save(game_cur);
-    }
-
-    @GetMapping("/games/player2_decrement/{gameID}")
-    public void decrementTwo(@PathVariable(value = "gameID") int gameID)
-    {
-        Game game_cur = gameRepository.findGameByID(gameID);
-        game_cur.decrement2();
-        gameRepository.save(game_cur);
-    }
-
-
-
-
-
-    @GetMapping("/games/player1_get_score/{gameID}")
-    public int getScoreOne(@PathVariable(value = "gameID") int gameID)
-    {
-        Game game_cur = gameRepository.findGameByID(gameID);
-        gameRepository.save(game_cur);
-        return game_cur.getPlayer1Score();
-    }
-
-    @GetMapping("/games/player2_get_score/{gameID}")
-    public int getScoreTwo(@PathVariable(value = "gameID") int gameID)
-    {
-        Game game_cur = gameRepository.findGameByID(gameID);
-        gameRepository.save(game_cur);
-        return game_cur.getPlayer2Score();
-    }
-
-    @GetMapping("games/is_player2_found/{gameID}")
-    public Boolean isPlayerTwoFound(@PathVariable(value = "gameID") int gameID)
-    {
-        Game game_cur = gameRepository.findGameByID(gameID);
-        if(game_cur.isPlayerTwoFound()) return true;
-        return false;
-    }
-
-    
+        else{
+            Additon new_obj = new Addition(username, score);
+            additionLeaderboardRepository.save(new_obj);
+        }
+    }    
 }

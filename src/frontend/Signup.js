@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
+import User from './Api/User'
 
 import { Grid, Typography, Divider, TextField, InputAdornment, Button } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import logo from '../resources/logo.png'
 import './Login.css'
 
 const bgGreen='#84c454';
 
-export default function Login() {
+export default function Signup(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -20,16 +21,28 @@ export default function Login() {
 
   const [passwordMatch, setPasswordMatch] = useState(false);
   const [duplicateUserName, setDuplicateUsername] = useState(false);
+
+  const history = useHistory();
   
 
   function CreateAccount() {
-      /*if (user exists) {
-        setDuplicateUsername(true);
-      }*/
+      User.getUser(username).then(res => {
+        if (res.data) {
+          setDuplicateUsername(true);
+          setUsername("");
+        } else {
+          User.createUser(username, password).then(res_ => {
+            props.setIsLoggedInGLobal(true);
+            props.setUsernameGlobal(username);
+            localStorage.setItem('username', username)
+            history.push("/");
+          });
+        }
+      })
   }
 
   return (
-    <Grid container direction="row" justifyContent="center" alignItems="center" sx={{height: '100vh', backgroundColor: bgGreen}}>
+    <Grid container direction="row" justifyContent="center" alignItems="center" sx={{height: '100vh', position: 'fixed', backgroundColor: bgGreen}}>
       <Grid item xs={4} container direction="column" alignItems="center" sx={{backgroundColor: 'white', padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
         <img src={logo} className="logo"/>
         <Typography variant="h5" align="center">
@@ -70,7 +83,7 @@ export default function Login() {
         }}/>
         <br/>
         {confirmPassword && !passwordMatch && <Typography color="error" align="left">Error: passwords do not match.</Typography>}
-        {duplicateUserName && <Typography color="error" align="left">Error: the username {username} is already taken.</Typography>}
+        {duplicateUserName && <Typography color="error" align="left">Error: the username {username} is already taken. Please try again with a different username.</Typography>}
         <br/>
         {username && password && password==confirmPassword && 
           <Button color="inherit" variant="contained" fullWidth sx={{backgroundColor: bgGreen}}>

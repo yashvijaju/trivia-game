@@ -7,6 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import addition from '../../resources/addition.png';
 
 
 export default function MediaCard() {
@@ -14,8 +15,9 @@ export default function MediaCard() {
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
-        height="100"
-        image="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinclipart.com%2Fpindetail%2FibiiRh_sign-clipart-addition-blue-plus-sign-png-transparent%2F&psig=AOvVaw1Ln_KQCOpSviS6X40758Kd&ust=1638477887105000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOCDz_a7w_QCFQAAAAAdAAAAABAD"
+        height="280"
+        //image= "https://img.favpng.com/20/21/0/addition-plus-and-minus-signs-clip-art-png-favpng-ytTYGc5k8QRDC8QRJCetpN7vt.jpg"
+        img src = {addition}
         alt="Additon"
       />
       <CardContent>

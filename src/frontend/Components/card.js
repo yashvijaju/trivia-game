@@ -5,28 +5,31 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import addition from '../../resources/addition.png';
 
 export default function MediaCard() {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
-        height="140"
-        image="/static/images/cards/contemplative-reptile.jpg"
-        alt="green iguana"
+        height="280"
+        //image="https://www.theschoolrun.com/sites/theschoolrun.com/files/article_images/addition.jpg"
+        img src={addition}
+        alt="Additon"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          Addition
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+        Addition is one of the four basic operations of arithmetic,  
+        The addition of two whole numbers results in the total amount or 
+        sum of those values combined.
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small" href="/game/addition/multiplayer">Play Multiplayer</Button>
+        <Button size="small" href="/game/addition/singleplayer">Solo Practice</Button>
       </CardActions>
     </Card>
   );
