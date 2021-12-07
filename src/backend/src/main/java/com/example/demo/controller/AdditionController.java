@@ -40,5 +40,17 @@ public class AdditionController {
             Addition new_obj = new Addition(username, score);
             additionLeaderboardRepository.save(new_obj);
         }
+    }
+
+
+    GetMapping("/{username}/{score}")
+    public void threadController(){
+        ArrayList<Addition> all_leaderboard = AdditionLeaderboardRepository.findAll();
+        int size = all_leaderboard.size();
+        for(int i =0; i< size; i++){
+
+            Thread t = new AdditionThread(all_leaderboard.username, all_leaderboard.score);
+            t.start();
+        }
     }    
 }
