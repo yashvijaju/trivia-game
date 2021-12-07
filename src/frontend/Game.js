@@ -93,13 +93,13 @@ function Game(props) {
     })
   }
 
-  function waitForSecondPlayer() {
-    GameService.isPlayerTwoFound(gameID).then(response => {
+  function waitForSecondPlayer(gameID_) {
+    GameService.isPlayerTwoFound(gameID_).then(response => {
       if (response.data) {
         setGameActive(true);
         setTimeout(() => setSec(sec - 1), 1000)
       }
-      else waitForSecondPlayer();
+      else waitForSecondPlayer(gameID_);
     })
   }
 
@@ -109,7 +109,8 @@ function Game(props) {
       if(!res.data) {
         GameService.createLobby(localStorage.getItem("username")).then(res_ => {
           setPlayerNumber(1);
-          waitForSecondPlayer();
+          waitForSecondPlayer(res_.data);
+          setGameID(res_.data);
           });
       }
       else{

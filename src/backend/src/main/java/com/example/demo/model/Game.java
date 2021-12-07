@@ -9,12 +9,25 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Game {
     
     @Id
-    private int id = 1;
+    private int id;
     private String playeroneID;
     private String playertwoID;
 
     private int player1score;
     private int player2score;
+
+
+    public Game(String playeroneID)
+    {
+        this.playeroneID = playeroneID;
+        this.playertwoID = "";
+
+        player1score = 0;
+        player2score = 0;
+
+        int rand_num = (int)(Math.random()*10000);
+        id = rand_num;
+    }
 
     public void increment1()
     {
@@ -44,16 +57,6 @@ public class Game {
     public int getPlayer2Score()
     {
         return player2score;
-    }
-
-
-    public Game(String playeroneID)
-    {
-        this.playeroneID = playeroneID;
-        this.playertwoID = "";
-
-        player1score = 0;
-        player2score = 0;
     }
 
     public boolean isPlayerTwoFound()
