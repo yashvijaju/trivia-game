@@ -9,6 +9,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
+import LeaderboardService from './Api/Leaderboard'
+
 
 function Leaderboard() {
   const [additionLeaderboard, setAdditionLeaderboard] = useState([
@@ -45,6 +47,9 @@ function Leaderboard() {
 
   useEffect(()=> {
     // TO-DO: get Leaderboard values HERE
+    LeaderboardService.getTop10Scores().then(res => {
+      console.log(res.data);
+    })
   }, [])
   
   return (

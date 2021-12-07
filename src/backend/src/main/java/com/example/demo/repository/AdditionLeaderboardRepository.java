@@ -15,4 +15,3 @@ public interface AdditionLeaderboardRepository extends MongoRepository<Addition,
     
     ArrayList<Addition> findAll();
 }
-

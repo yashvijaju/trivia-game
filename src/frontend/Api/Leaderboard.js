@@ -7,6 +7,10 @@ class LeaderboardService {
     updateAdditionHighScore(username, score) {
         return axios.get(USER_API_BASE_URL + "/addition/" + username + "/" + score);
     }
+
+    getTop10Scores() {
+        return axios.get(USER_API_BASE_URL + "/addition/get_top_scores");
+    }
 }
 
 export default new LeaderboardService()

@@ -21,6 +21,10 @@ public class Addition {
         return player_score;
     }
 
+    public String getPlayerUsername() {
+        return player_username;
+    }
+
     public Addition(String player_username, int player_score) {
         this.player_username = player_username;
         this.player_score = player_score;
