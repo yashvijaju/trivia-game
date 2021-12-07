@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Addition;
+import com.example.demo.model.AdditionThread;
 import com.example.demo.repository.AdditionLeaderboardRepository;
 
 
@@ -43,14 +44,13 @@ public class AdditionController {
     }
 
 
-    GetMapping("/{username}/{score}")
-    public void threadController(){
-        ArrayList<Addition> all_leaderboard = AdditionLeaderboardRepository.findAll();
-        int size = all_leaderboard.size();
-        for(int i =0; i< size; i++){
-
-            Thread t = new AdditionThread(all_leaderboard.username, all_leaderboard.score);
+    @GetMapping("/get_top_scores")
+    public ArrayList<Addition> getTop10(){
+        ArrayList<Addition> all_leaderboard = additionLeaderboardRepository.findAll();
+        for (Addition curr_leaderboard : all_leaderboard){
+            Thread t = new AdditionThread(curr_leaderboard);
             t.start();
         }
+        return all_leaderboard;
     }    
 }
