@@ -44,7 +44,7 @@ function Game(props) {
 
   const [ansCorrect, setAnsCorrect] = useState("white");
   
-  const [sec, setSec] = useState(10);
+  const [sec, setSec] = useState(30);
   const [score, setScore] = useState(0);
   const [opponentScore, setOpponentScore] = useState(0);
   const [gameActive, setGameActive] = useState(false);
@@ -177,7 +177,7 @@ function Game(props) {
 
   function GameOver() {
     setGameActive(false);
-    if (player_mode==="multiplayer") UserService.updateHighScore(localStorage.getItem("username"), math_mode, score).then(res => {})
+    if (score > opponentScore && player_mode==="multiplayer") UserService.updateHighScore(localStorage.getItem("username"), math_mode, score).then(res => {})
   }
 
   return (
