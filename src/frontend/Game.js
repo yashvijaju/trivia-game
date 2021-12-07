@@ -47,7 +47,6 @@ function Game(props) {
   const [sec, setSec] = useState(120);
   const [score, setScore] = useState(0);
   const [opponentScore, setOpponentScore] = useState(0);
-  const [isGameOver, setIsGameOver] = useState(false);
   const [gameActive, setGameActive] = useState(false);
   const [play] = useSound(math_mode === "addition" ? undertale : math_mode === "subtraction" ? ghostFight 
   : math_mode === "multiplication" ? hotel : metalCrusher)
@@ -63,7 +62,7 @@ function Game(props) {
     // } else if (sec > 0) {
     //   setTimerId(setTimeout(() => setSec(sec - 1), 1000))
     // }
-    if (gameActive && sec === 0) GameOver();
+    if (gameActive && sec <= 0) GameOver();
     else if (gameActive) setTimeout(() => {
       setSec(sec - 1);
       if (math_mode === "multiplayer") {
@@ -74,11 +73,9 @@ function Game(props) {
   }, [sec])
 
   useEffect(() => {
-    if(!gameActive && player_mode==="multiplayer")
-    {
+    if (!gameActive && player_mode==="multiplayer") {
       multiplayer();
     }
-    setTimeout(() => setSec(sec - 1), 1000)
   }, [gameActive])
 
   useEffect(()=>play(),[play])
@@ -98,7 +95,10 @@ function Game(props) {
 
   function waitForSecondPlayer() {
     GameService.isPlayerTwoFound(gameID).then(response => {
-      if (response.data) setGameActive(true);
+      if (response.data) {
+        setGameActive(true);
+        setTimeout(() => setSec(sec - 1), 1000)
+      }
       else waitForSecondPlayer();
     })
   }
@@ -116,6 +116,7 @@ function Game(props) {
         setPlayerNumber(2);
         setGameID(res.data);
         setGameActive(true);
+        setTimeout(() => setSec(sec - 1), 1000);
       }
     })
   }
@@ -164,14 +165,13 @@ function Game(props) {
 
   function GameOver() {
     setGameActive(false);
-    setIsGameOver(true);
     if (player_mode==="multiplayer") UserService.updateHighScore(localStorage.getItem("username"), math_mode, score).then(res => {})
   }
 
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center" sx={{height: '100vh', position: 'fixed', backgroundColor: bg}}>
       {
-        gameActive ?
+        gameActive && sec>0 ?
         <Grid item xs={8} container direction="column" sx={{ backgroundColor: ansCorrect, padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
           <Grid item xs={12} container direction="row" justifyContent="space-between">
             <Typography>
@@ -205,7 +205,7 @@ function Game(props) {
             )}
           </Grid>
         </Grid>
-        : isGameOver ?
+        : sec <=0 ?
         <Grid item xs={8} container direction="column" sx={{ backgroundColor: ansCorrect, padding: '1rem 3rem 2rem', borderRadius: '20px', boxShadow: "2px 2px 2px grey", border: '1px solid grey'}}>
           <Typography align="center" variant="h5">
             <br/>
