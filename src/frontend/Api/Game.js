@@ -20,7 +20,6 @@ class GameService {
 
     incrementPlayerOneScore(gameID)
     {
-        alert("here")
         return axios.get(USER_API_BASE_URL + '/player1_increment/' + gameID);
     }
     
