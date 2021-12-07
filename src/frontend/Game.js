@@ -65,7 +65,7 @@ function Game(props) {
     if (gameActive && sec <= 0) GameOver();
     else if (gameActive) setTimeout(() => {
       setSec(sec - 1);
-      if (math_mode === "multiplayer") {
+      if (player_mode === "multiplayer") {
         if (playerNumber==1) GameService.getPlayerTwoScore(gameID).then(res => setOpponentScore(res.data));
         else GameService.getPlayerOneScore(gameID).then(res => setOpponentScore(res.data));
       }
@@ -147,14 +147,14 @@ function Game(props) {
     if (ans === eval(firstNumber+math_sign+secondNumber)) {
       setAnsCorrect("green");
       setScore((score) => score + 1);
-      if (math_mode === "multiplayer") {
+      if (player_mode === "multiplayer") {
         if (playerNumber === 1) GameService.incrementPlayerOneScore(gameID);
         else GameService.incrementPlayerTwoScore(gameID);
       }
     } else {
       setAnsCorrect("red");
       setScore((score) => score - 1);
-      if (math_mode === "multiplayer") {
+      if (player_mode === "multiplayer") {
         if (playerNumber === 1) GameService.decrementPlayerOneScore(gameID);
         else GameService.decrementPlayerTwoScore(gameID);
       }

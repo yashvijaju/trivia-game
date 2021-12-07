@@ -67,6 +67,7 @@ public class GameController {
     {
         Game game_cur = gameRepository.findGameByID(gameID);
         game_cur.increment1();
+        System.out.println("increment1");
         gameRepository.save(game_cur);
     }
 
