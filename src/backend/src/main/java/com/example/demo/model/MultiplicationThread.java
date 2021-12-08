@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class AdditionThread extends Thread 
+public class MultiplicationThread extends Thread 
 {
 
 	private Lock lck = new ReentrantLock();
-	public static ArrayList<Addition> arr = new ArrayList<Addition>();
-	private Addition obj;
-	public AdditionThread(Addition object) {
+	public static ArrayList<Multiplication> arr = new ArrayList<Multiplication>();
+	private Multiplication obj;
+	public MultiplicationThread(Multiplication object) {
 		obj = object;
 	}
 	

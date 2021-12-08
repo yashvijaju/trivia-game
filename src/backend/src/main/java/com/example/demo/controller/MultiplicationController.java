@@ -16,42 +16,43 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.Addition;
-import com.example.demo.model.AdditionThread;
-import com.example.demo.repository.AdditionLeaderboardRepository;
+import com.example.demo.model.Multiplication;
+import com.example.demo.model.MultiplicationThread;
+import com.example.demo.repository.MultiplicationLeaderboardRepository;
 
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/leaderboard/addition")
-public class AdditionController {
+@RequestMapping("/api/v1/leaderboard/multiplication")
+public class MultiplicationController {
 
     @Autowired
-    private AdditionLeaderboardRepository additionLeaderboardRepository;
+    private MultiplicationLeaderboardRepository multiplicationLeaderboardRepository;
 
     @GetMapping("/{username}/{score}")
     public void getHighScore(@PathVariable(value = "username") String username, @PathVariable(value = "score") int score)
     {
-        Addition add = additionLeaderboardRepository.findUser(username);
+        Multiplication add = multiplicationLeaderboardRepository.findUser(username);
         if (add != null) {
             add.updateScore(score);
-            additionLeaderboardRepository.save(add);
+            multiplicationLeaderboardRepository.save(add);
         }
         else {
-            Addition new_obj = new Addition(username, score);
-            additionLeaderboardRepository.save(new_obj);
+            Multiplication new_obj = new Multiplication(username, score);
+            multiplicationLeaderboardRepository.save(new_obj);
         }
     }
 
 
     @GetMapping("/get_top_scores")
-    public ArrayList<Addition> getTop10(){
-        ArrayList<Addition> all_leaderboard = additionLeaderboardRepository.findAll();
-        for (Addition curr_leaderboard : all_leaderboard){
-            Thread t = new AdditionThread(curr_leaderboard);
+    public ArrayList<Multiplication> getTop10(){
+        ArrayList<Multiplication> all_leaderboard = multiplicationLeaderboardRepository.findAll();
+        for (Multiplication curr_leaderboard : all_leaderboard){
+            Thread t = new MultiplicationThread(curr_leaderboard);
             t.start();
         }
-        all_leaderboard = AdditionThread.arr;
+        all_leaderboard = MultiplicationThread.arr;
         return all_leaderboard;
     }    
 }
+
