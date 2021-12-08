@@ -14,42 +14,72 @@ import LeaderboardService from './Api/Leaderboard'
 
 function Leaderboard() {
   const [additionLeaderboard, setAdditionLeaderboard] = useState([
-    {"username": "abc", "score": 5},
-    {"username": "abc", "score": 15},
-    {"username": "abc", "score": 25},
-    {"username": "abc", "score": 35},
-    {"username": "abc", "score": 45},
+    {"playerUsername": "ucantbeatme", "playerScore": 15},
+    {"playerUsername": "hellothere", "playerScore": 15},
+    {"playerUsername": "seeyalater", "playerScore": 14},
+    {"playerUsername": "okwaterbottle", "playerScore": 13},
+    {"playerUsername": "lampisbright", "playerScore": 10},
+    {"playerUsername": "whereismycharger", "playerScore": 6},
+    {"playerUsername": "zoom", "playerScore": 5},
+    {"playerUsername": "googlemeets", "playerScore": 5},
+    {"playerUsername": "helloworld", "playerScore": 5},
+    {"playerUsername": "sup", "playerScore": 5},
+
   ])
 
   const [subtractionLeaderboard, setSubtractionLeaderboard] = useState([
-    {"username": "abc", "score": 5},
-    {"username": "abc", "score": 15},
-    {"username": "abc", "score": 25},
-    {"username": "abc", "score": 35},
-    {"username": "abc", "score": 45},
+    {"playerUsername": "ucantbeatme", "playerScore": 15},
+    {"playerUsername": "hellothere", "playerScore": 15},
+    {"playerUsername": "seeyalater", "playerScore": 14},
+    {"playerUsername": "okwaterbottle", "playerScore": 13},
+    {"playerUsername": "lampisbright", "playerScore": 10},
+    {"playerUsername": "whereismycharger", "playerScore": 6},
+    {"playerUsername": "zoom", "playerScore": 5},
+    {"playerUsername": "googlemeets", "playerScore": 5},
+    {"playerUsername": "helloworld", "playerScore": 5},
+    {"playerUsername": "sup", "playerScore": 5},
   ])
 
   const [multiplicationLeaderboard, setMultiplicationLeaderboard] = useState([
-    {"username": "cba", "score": 5},
-    {"username": "abc", "score": 15},
-    {"username": "abc", "score": 25},
-    {"username": "abc", "score": 35},
-    {"username": "abc", "score": 45},
+    {"playerUsername": "ucantbeatme", "playerScore": 15},
+    {"playerUsername": "hellothere", "playerScore": 15},
+    {"playerUsername": "seeyalater", "playerScore": 14},
+    {"playerUsername": "okwaterbottle", "playerScore": 13},
+    {"playerUsername": "lampisbright", "playerScore": 10},
+    {"playerUsername": "whereismycharger", "playerScore": 6},
+    {"playerUsername": "zoom", "playerScore": 5},
+    {"playerUsername": "googlemeets", "playerScore": 5},
+    {"playerUsername": "helloworld", "playerScore": 5},
+    {"playerUsername": "sup", "playerScore": 5},
   ])
 
   const [divisionLeaderboard, setDivisionLeaderboard] = useState([
-    {"username": "abc", "score": 5},
-    {"username": "abc", "score": 15},
-    {"username": "abc", "score": 25},
-    {"username": "abc", "score": 35},
-    {"username": "abc", "score": 45},
+    {"playerUsername": "ucantbeatme", "playerScore": 15},
+    {"playerUsername": "hellothere", "playerScore": 15},
+    {"playerUsername": "seeyalater", "playerScore": 14},
+    {"playerUsername": "okwaterbottle", "playerScore": 13},
+    {"playerUsername": "lampisbright", "playerScore": 10},
+    {"playerUsername": "whereismycharger", "playerScore": 6},
+    {"playerUsername": "zoom", "playerScore": 5},
+    {"playerUsername": "googlemeets", "playerScore": 5},
+    {"playerUsername": "helloworld", "playerScore": 5},
+    {"playerUsername": "sup", "playerScore": 5},
   ])
 
   useEffect(()=> {
-    // TO-DO: get Leaderboard values HERE
-    LeaderboardService.getTop10Scores().then(res => {
-      console.log(res.data);
+    LeaderboardService.getTop10ScoresAddition().then(res => {
+      setAdditionLeaderboard(res.data);
     })
+    LeaderboardService.getTop10ScoresSubtraction().then(res => {
+      setSubtractionLeaderboard(res.data);
+    })
+    LeaderboardService.getTop10ScoresMultiplication().then(res => {
+      setMultiplicationLeaderboard(res.data);
+    })
+    LeaderboardService.getTop10ScoresDivision().then(res => {
+      setDivisionLeaderboard(res.data);
+    })
+
   }, [])
   
   return (
@@ -59,7 +89,7 @@ function Leaderboard() {
         <List>
           <ListItem
             secondaryAction={
-              <p>Score</p>
+              <p>Player Score</p>
             }
           >
             <ListItemText
@@ -69,11 +99,11 @@ function Leaderboard() {
           {additionLeaderboard.map((key, index) => 
             <ListItem
               secondaryAction={
-                <p>{key.score}</p>
+                <p>{key.playerScore}</p>
               }
             >
               <ListItemText
-                primary={key.username}
+                primary={key.playerUsername}
               />
             </ListItem>
           )}
@@ -85,7 +115,7 @@ function Leaderboard() {
         <List>
           <ListItem
             secondaryAction={
-              <p>Score</p>
+              <p>Player Score</p>
             }
           >
             <ListItemText
@@ -95,11 +125,11 @@ function Leaderboard() {
           {subtractionLeaderboard.map((key, index) => 
             <ListItem
               secondaryAction={
-                <p>{key.score}</p>
+                <p>{key.playerScore}</p>
               }
             >
               <ListItemText
-                primary={key.username}
+                primary={key.playerUsername}
               />
             </ListItem>
           )}
@@ -111,7 +141,7 @@ function Leaderboard() {
         <List>
           <ListItem
             secondaryAction={
-              <p>Score</p>
+              <p>Player Score</p>
             }
           >
             <ListItemText
@@ -121,11 +151,11 @@ function Leaderboard() {
           {multiplicationLeaderboard.map((key, index) => 
             <ListItem
               secondaryAction={
-                <p>{key.score}</p>
+                <p>{key.playerScore}</p>
               }
             >
               <ListItemText
-                primary={key.username}
+                primary={key.playerUsername}
               />
             </ListItem>
           )}
@@ -137,7 +167,7 @@ function Leaderboard() {
         <List>
           <ListItem
             secondaryAction={
-              <p>Score</p>
+              <p>Player Score</p>
             }
           >
             <ListItemText
@@ -147,11 +177,11 @@ function Leaderboard() {
           {divisionLeaderboard.map((key, index) => 
             <ListItem
               secondaryAction={
-                <p>{key.score}</p>
+                <p>{key.playerScore}</p>
               }
             >
               <ListItemText
-                primary={key.username}
+                primary={key.playerUsername}
               />
             </ListItem>
           )}
